@@ -24,6 +24,27 @@ document.addEventListener('DOMContentLoaded', function () {
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // "Beställ"-knappar på produktkort: förifyll meddelandet och scrolla till formuläret
+  var orderButtons = document.querySelectorAll('.order-btn');
+  var messageField = document.getElementById('message');
+
+  orderButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      var product = button.getAttribute('data-product');
+      if (messageField) {
+        messageField.value = 'Jag vill beställa: ' + product;
+      }
+      var contactSection = document.getElementById('kontakt');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      var nameField = document.getElementById('name');
+      if (nameField) {
+        window.setTimeout(function () { nameField.focus(); }, 400);
+      }
+    });
+  });
+
   // Beställningsformulär
   var form = document.getElementById('order-form');
   var status = document.getElementById('form-status');

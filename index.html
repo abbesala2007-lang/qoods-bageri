@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qoods Bageri – Arabiska konditorier i Åstorp</title>
-<meta name="description" content="Qoods Bageri i Åstorp – arabiska sötsaker och bakverk av högsta kvalitet. Baklava, knafe, mabroume och mycket mer. Vi skickar till hela Sverige.">
+<title>Qoods Bageri – Arabiskt konditori i Åstorp</title>
+<meta name="description" content="Qoods Bageri i Åstorp – handgjorda arabiska bakverk och sötsaker. Baklava, knafe, mabroume och mycket mer. Vi skickar till hela Sverige.">
 <link rel="icon" href="images/placeholder.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,8 +19,7 @@
 
     <nav class="main-nav" id="main-nav">
       <a href="#om-oss">Om oss</a>
-      <a href="#produkter">Produkter</a>
-      <a href="#leverans">Leverans</a>
+      <a href="#bakverk">Bakverk</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#kontakt" class="nav-cta">Beställ nu</a>
     </nav>
@@ -40,85 +39,100 @@
       <p class="hero-eyebrow">Åstorp · Arabiskt konditori</p>
       <h1>Qoods Bageri</h1>
       <p class="hero-subtitle">Luxurious Oriental Sweets</p>
-      <a href="#kontakt" class="btn btn-gold">Beställ nu</a>
+      <p class="hero-tagline">Handgjorda arabiska bakverk, gjorda med kärlek och generationers tradition.</p>
+      <div class="hero-buttons">
+        <a href="#kontakt" class="btn btn-gold">Beställ nu</a>
+        <a href="#bakverk" class="btn btn-outline">Se våra bakverk</a>
+      </div>
     </div>
   </section>
 
   <!-- Om oss -->
   <section class="about" id="om-oss">
     <div class="container about-inner">
-      <div class="section-heading">
+      <div class="about-image">
+        <img src="images/box-luxury.jpg" alt="Qoods Bageris presentask med handgjorda sötsaker" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+      </div>
+      <div class="about-text-wrap">
         <p class="eyebrow">Vår historia</p>
         <h2>Hantverk &amp; tradition</h2>
+        <p class="about-text">
+          Hos Qoods Bageri för vi vidare generationers hantverk från Mellanöstern och
+          förvandlar det till handgjorda sötsaker av högsta kvalitet. Varje bakverk
+          formas för hand med noggrant utvalda råvaror – pistagenötter, honung, kaymak
+          och doftande sockerlag – enligt recept som ärvts från familj till familj.
+        </p>
+        <p class="about-quote">"Varje bit berättar en historia om tålamod, hantverk och äkta smak."</p>
+        <p class="about-text">
+          Vi tror på precision och kvalitet i allt vi bakar, och vill dela den arabiska
+          konditoritraditionen med hela Sverige.
+        </p>
       </div>
-      <p class="about-text">
-        Hos Qoods Bageri för vi vidare generationers hantverk från Mellanöstern och
-        förvandlar det till handgjorda sötsaker av högsta kvalitet. Varje bakverk
-        formas för hand med noggrant utvalda råvaror – pistagenötter, honung, kaymak
-        och doftande sockerlag – enligt recept som ärvts från familj till familj.
-        Vi tror på tålamod, precision och äkta smak i allt vi bakar, och vill dela
-        den arabiska konditoritraditionen med hela Sverige.
-      </p>
     </div>
   </section>
 
-  <!-- Produkter -->
-  <section class="products" id="produkter">
+  <!-- Bakverk -->
+  <section class="products" id="bakverk">
     <div class="container">
       <div class="section-heading center">
         <p class="eyebrow">Vårt sortiment</p>
-        <h2>Våra produkter</h2>
+        <h2>Våra bakverk</h2>
       </div>
 
       <div class="product-grid">
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/signature-box.jpg" alt="Qoods Signature Box" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/box-luxury.jpg" alt="Qoods Signature Box" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Qoods Signature Box</h3>
             <p class="price">300 kr</p>
+            <button class="btn btn-small order-btn" data-product="Qoods Signature Box">Beställ</button>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/chokladdoppade-kakor.jpg" alt="Chokladdoppade Kakor" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/choco-cookies.jpg" alt="Chokladdoppade Kakor" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Chokladdoppade Kakor</h3>
             <p class="price">150 kr</p>
+            <button class="btn btn-small order-btn" data-product="Chokladdoppade Kakor">Beställ</button>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/pistagekakor.jpg" alt="Pistagekakor" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/pistachio-cookies.jpg" alt="Pistagekakor" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Pistagekakor</h3>
             <p class="price">150 kr</p>
+            <button class="btn btn-small order-btn" data-product="Pistagekakor">Beställ</button>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/baklava-original.jpg" alt="Baklava Original" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/baklava-tray.jpg" alt="Baklava Original" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Baklava Original</h3>
             <p class="price">150 kr</p>
+            <button class="btn btn-small order-btn" data-product="Baklava Original">Beställ</button>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/halawet-el-jibn.jpg" alt="Halawet el-Jibn" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/halawet-jibn.jpg" alt="Halawet el-Jibn" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Halawet el-Jibn</h3>
             <p class="price">120 kr/kg</p>
+            <button class="btn btn-small order-btn" data-product="Halawet el-Jibn">Beställ</button>
           </div>
         </article>
 
@@ -129,16 +143,18 @@
           <div class="product-info">
             <h3>Knafe</h3>
             <p class="price">200 kr/kg</p>
+            <button class="btn btn-small order-btn" data-product="Knafe">Beställ</button>
           </div>
         </article>
 
         <article class="product-card">
           <div class="product-image">
-            <img src="images/chokladtarta.jpg" alt="Chokladtårta" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+            <img src="images/chocolate-cake.jpg" alt="Chokladtårta" onerror="this.onerror=null;this.src='images/placeholder.svg';">
           </div>
           <div class="product-info">
             <h3>Chokladtårta</h3>
             <p class="price">20 kr/st</p>
+            <button class="btn btn-small order-btn" data-product="Chokladtårta">Beställ</button>
           </div>
         </article>
 
@@ -149,6 +165,7 @@
           <div class="product-info">
             <h3>Mabroume</h3>
             <p class="price">350 kr/kg</p>
+            <button class="btn btn-small order-btn" data-product="Mabroume">Beställ</button>
           </div>
         </article>
 
@@ -156,52 +173,59 @@
     </div>
   </section>
 
-  <!-- Leverans -->
-  <section class="shipping" id="leverans">
-    <div class="container shipping-inner">
-      <svg class="shipping-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M4 40h34V16H4v24Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-        <path d="M38 24h12l8 8v8H38V24Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-        <circle cx="16" cy="44" r="5" stroke="currentColor" stroke-width="2.5"/>
-        <circle cx="48" cy="44" r="5" stroke="currentColor" stroke-width="2.5"/>
-      </svg>
-      <h2>Vi skickar till hela Sverige</h2>
-      <p>Oavsett var i landet du bor kan du njuta av äkta arabiska sötsaker.
-         Beställ hem din låda med Qoods Bageris finaste bakverk, noggrant förpackad för
-         att hålla sig fräsch hela vägen till din dörr.</p>
-    </div>
-  </section>
-
   <!-- Kontakt -->
   <section class="contact" id="kontakt">
     <div class="container contact-inner">
-      <div class="section-heading">
-        <p class="eyebrow">Beställning</p>
+
+      <div class="contact-info">
+        <p class="eyebrow">Besök eller beställ</p>
         <h2>Kontakta oss</h2>
-        <p class="contact-text">Fyll i formuläret nedan så återkommer vi så snart som möjligt
-           för att bekräfta din beställning.</p>
+
+        <ul class="contact-details">
+          <li>
+            <span class="contact-label">Adress</span>
+            <span>Östra Vägen 2, 265 31 Åstorp</span>
+          </li>
+          <li>
+            <span class="contact-label">Telefon</span>
+            <span><a href="tel:0720207210">072-020 72 10</a></span>
+          </li>
+          <li>
+            <span class="contact-label">Öppettider</span>
+            <span>Alla dagar 10:00–21:00</span>
+          </li>
+        </ul>
+
+        <p class="shipping-note">
+          <strong>Vi skickar till hela Sverige.</strong> Oavsett var i landet du bor kan du
+          njuta av äkta arabiska sötsaker – noggrant förpackade för att hålla sig fräscha
+          hela vägen till din dörr.
+        </p>
       </div>
 
-      <form class="order-form" id="order-form" novalidate>
-        <div class="form-group">
-          <label for="name">Namn</label>
-          <input type="text" id="name" name="name" placeholder="Ditt namn" required>
-        </div>
+      <div class="contact-form-wrap">
+        <form class="order-form" id="order-form" novalidate>
+          <div class="form-group">
+            <label for="name">Namn</label>
+            <input type="text" id="name" name="name" placeholder="Ditt namn" required>
+          </div>
 
-        <div class="form-group">
-          <label for="phone">Telefonnummer</label>
-          <input type="tel" id="phone" name="phone" placeholder="07X-XXX XX XX" required>
-        </div>
+          <div class="form-group">
+            <label for="phone">Telefonnummer</label>
+            <input type="tel" id="phone" name="phone" placeholder="07X-XXX XX XX" required>
+          </div>
 
-        <div class="form-group">
-          <label for="message">Meddelande / Beställning</label>
-          <textarea id="message" name="message" rows="5" placeholder="Vad vill du beställa?" required></textarea>
-        </div>
+          <div class="form-group">
+            <label for="message">Meddelande / Beställning</label>
+            <textarea id="message" name="message" rows="5" placeholder="Vad vill du beställa?" required></textarea>
+          </div>
 
-        <button type="submit" class="btn btn-gold">Skicka beställning</button>
+          <button type="submit" class="btn btn-gold">Skicka beställning</button>
 
-        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-      </form>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
     </div>
   </section>
 
@@ -209,10 +233,25 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="logo footer-logo">Qoods <span>Bageri</span></p>
-    <p>Åstorp, Sverige · Vi levererar till hela landet</p>
-    <p class="copyright">&copy; <span id="year"></span> Qoods Bageri. Alla rättigheter förbehållna.</p>
+    <div class="footer-col">
+      <p class="logo footer-logo">Qoods <span>Bageri</span></p>
+      <p>Handgjorda arabiska bakverk och sötsaker från Åstorp.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Kontakt</h3>
+      <p>Östra Vägen 2, 265 31 Åstorp</p>
+      <p><a href="tel:0720207210">072-020 72 10</a></p>
+      <p>Alla dagar 10:00–21:00</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Frakt</h3>
+      <p>Vi skickar till hela Sverige, snabbt och tryggt förpackat.</p>
+    </div>
   </div>
+
+  <p class="copyright">&copy; <span id="year"></span> Qoods Bageri. Alla rättigheter förbehållna.</p>
 </footer>
 
 <script src="js/script.js"></script>
