@@ -226,6 +226,16 @@ html[lang="ar"]{--serif:"Amiri","Fraunces",serif;--sans:"Tajawal","Mulish",sans-
 html[dir="rtl"] p.lead,html[dir="rtl"] .menu-head p,html[dir="rtl"] .contact-head p{max-width:none}
 html[dir="rtl"] .item-title h4{font-weight:600}
 
+/* ===== Package / rule bits ===== */
+.pcard .thumb{position:relative}
+.pd-media{position:relative}
+.pbadge{position:absolute;top:12px;inset-inline-start:12px;background:var(--brown);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:999px;box-shadow:var(--shadow-sm)}
+.qty-row{display:flex;align-items:center;gap:12px}
+.qty-note{margin-top:14px;font-size:.92rem;color:#7b6d5b;background:#f3ece0;border:1px solid var(--line);border-radius:12px;padding:11px 15px}
+.qty-note.pickup{color:#8a5a38;background:#f3e6da}
+:root[data-theme="dark"] .qty-note{color:#c6b8a4;background:#221a12}
+:root[data-theme="dark"] .qty-note.pickup{color:#e0b088;background:#2a1e14}
+
 /* ===== Dark mode ===== */
 :root[data-theme="dark"]{
   --cream:#1e1710;--cream-top:#241c14;--blush:#3a2723;

@@ -227,13 +227,14 @@
 <script src="data.js"></script>
 <script>
   const grid = document.getElementById("productGrid");
+  const priceLabel = p => p.type === "kg" ? `${p.price} ${t('product.per_kg')}` : `${p.price} kr / ${p.weight}`;
   function renderGrid(){
     grid.innerHTML = PRODUCTS.map(p => `
       <a class="pcard" href="product.html?id=${p.id}">
-        <div class="thumb"><img src="${p.img}" alt="${pName(p.id)}"></div>
+        <div class="thumb"><img src="${p.img}" alt="${pName(p.id)}">${p.pickupOnly ? `<span class="pbadge">${t('badge.pickup')}</span>` : ""}</div>
         <div class="pbody">
           <div class="pname">${pName(p.id)}</div>
-          <div class="pprice">${p.price} ${t('product.per_kg')}</div>
+          <div class="pprice">${priceLabel(p)}</div>
           <div class="pview">${t('product.view')}</div>
         </div>
       </a>`).join("");

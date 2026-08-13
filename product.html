@@ -54,29 +54,43 @@
 <script>
   const params = new URLSearchParams(location.search);
   const p = productById(params.get("id")) || PRODUCTS[0];
-  let kg = 1;
+  const isKg = p.type === "kg";
+  let qty = minQty(p);
   const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
+
+  const priceLine = () => isKg
+    ? `${p.price} kr <small>/ ${t('unit.kg')}</small>`
+    : `${p.price} kr <small>${t(p.bag ? 'pd.per_bag' : 'pd.per_package')} · ${p.weight}</small>`;
+  const qtyLabel = () => isKg ? t('pd.howmany') : t(p.bag ? 'pd.howmany_bag' : 'pd.howmany_pkg');
+  const unitLabel = () => isKg ? t('unit.kg') : `× ${p.weight}`;
+  const notes = () => {
+    let n = "";
+    if (p.wholeOnly)  n += `<div class="qty-note">${t('pd.whole_only')}</div>`;
+    if (p.pickupOnly) n += `<div class="qty-note pickup">${t('pd.pickup_only')}</div>`;
+    return n;
+  };
 
   function render(){
     document.getElementById("crumbName").textContent = pName(p.id);
     document.getElementById("pdGrid").innerHTML = `
-      <div class="pd-media"><img src="${p.img}" alt="${pName(p.id)}"></div>
+      <div class="pd-media"><img src="${p.img}" alt="${pName(p.id)}">${p.pickupOnly ? `<span class="pbadge">${t('badge.pickup')}</span>` : ""}</div>
       <div class="pd-info">
         <div class="eyebrow">${t('pd.eyebrow')}</div>
         <h1>${pName(p.id)}</h1>
         <p class="desc">${pDesc(p.id)}</p>
-        <div class="pd-price">${p.price} kr <small>/ ${t('unit.kg')}</small></div>
+        <div class="pd-price">${priceLine()}</div>
         <div class="qty-block">
-          <div class="qty-label">${t('pd.howmany')}</div>
-          <div>
+          <div class="qty-label">${qtyLabel()}</div>
+          <div class="qty-row">
             <div class="stepper">
               <button type="button" id="minus">–</button>
-              <input id="kgInput" type="number" min="0.5" step="0.5" value="${kg}">
+              <input id="qtyInput" type="number" min="${minQty(p)}" step="${stepQty(p)}" value="${qty}">
               <button type="button" id="plus">+</button>
             </div>
-            <span class="kg-unit">${t('unit.kg')}</span>
+            <span class="kg-unit">${unitLabel()}</span>
           </div>
-          <div class="line-total">${t('pd.total')} <b id="lineTotal"></b></div>
+          ${notes()}
+          <div class="line-total">${t('pd.total')} <b id="lineTotalEl"></b></div>
           <div class="pd-actions">
             <button class="btn btn-primary" id="addBtn">${t('pd.add')}</button>
             <a class="btn btn-ghost" href="cart.html">${t('pd.gocart')}</a>
@@ -88,16 +102,16 @@
   }
 
   function wire(){
-    const input = document.getElementById("kgInput");
-    const lineTotal = document.getElementById("lineTotal");
+    const input = document.getElementById("qtyInput");
+    const totalEl = document.getElementById("lineTotalEl");
     const addedMsg = document.getElementById("addedMsg");
-    const paint = () => { lineTotal.textContent = fmt(p.price * kg) + " kr"; };
-    const setVal = v => { kg = Math.max(0.5, Math.round(v * 2) / 2); input.value = kg; paint(); };
-    document.getElementById("minus").onclick = () => setVal(kg - 0.5);
-    document.getElementById("plus").onclick  = () => setVal(kg + 0.5);
-    input.onchange = () => setVal(parseFloat(input.value) || 0.5);
+    const paint = () => { totalEl.textContent = fmt(lineTotal(p, qty)) + " kr"; };
+    const setVal = v => { qty = clampQty(p, v); input.value = qty; paint(); };
+    document.getElementById("minus").onclick = () => setVal(qty - stepQty(p));
+    document.getElementById("plus").onclick  = () => setVal(qty + stepQty(p));
+    input.onchange = () => setVal(parseFloat(input.value) || minQty(p));
     document.getElementById("addBtn").onclick = () => {
-      addToCart(p.id, kg);
+      addToCart(p.id, qty);
       addedMsg.classList.add("show");
       setTimeout(() => addedMsg.classList.remove("show"), 2600);
     };

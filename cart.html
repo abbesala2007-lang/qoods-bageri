@@ -51,7 +51,9 @@
 <script>
   const root = document.getElementById("cartRoot");
   const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
-  const getKg = id => { const e = getCart().find(x=>x.id===id); return e ? e.kg : 0.5; };
+  const getQty = id => { const e = getCart().find(x=>x.id===id); const p=productById(id); return e ? e.qty : minQty(p); };
+  const priceLabel = p => p.type === "kg" ? `${p.price} ${t('product.per_kg')}` : `${p.price} kr / ${p.weight}`;
+  const qtyLabel = (p, q) => p.type === "kg" ? `${fmt(q)} ${t('unit.kg')}` : `× ${q}`;
 
   function render(){
     const cart = getCart();
@@ -71,17 +73,17 @@
           <img src="${p.img}" alt="${pName(p.id)}">
           <div>
             <div class="ci-name">${pName(p.id)}</div>
-            <div class="ci-price">${p.price} ${t('product.per_kg')}</div>
+            <div class="ci-price">${priceLabel(p)}</div>
             <div class="ci-controls">
               <div class="mini-stepper">
                 <button data-dec="${p.id}">–</button>
-                <span>${fmt(item.kg)} ${t('unit.kg')}</span>
+                <span>${qtyLabel(p, item.qty)}</span>
                 <button data-inc="${p.id}">+</button>
               </div>
               <button class="ci-remove" data-remove="${p.id}">${t('cart.remove')}</button>
             </div>
           </div>
-          <div class="ci-total">${fmt(p.price * item.kg)} kr</div>
+          <div class="ci-total">${fmt(lineTotal(p, item.qty))} kr</div>
         </div>`;
     }).join("");
 
@@ -99,8 +101,8 @@
         </div>
       </div>`;
 
-    root.querySelectorAll("[data-inc]").forEach(b => b.onclick = () => { setKg(b.dataset.inc, getKg(b.dataset.inc)+0.5); render(); });
-    root.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { setKg(b.dataset.dec, getKg(b.dataset.dec)-0.5); render(); });
+    root.querySelectorAll("[data-inc]").forEach(b => b.onclick = () => { const p=productById(b.dataset.inc); setQty(p.id, getQty(p.id)+stepQty(p)); render(); });
+    root.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const p=productById(b.dataset.dec); setQty(p.id, getQty(p.id)-stepQty(p)); render(); });
     root.querySelectorAll("[data-remove]").forEach(b => b.onclick = () => { removeFromCart(b.dataset.remove); render(); });
   }
 
