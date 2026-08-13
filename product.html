@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qoods Bakery</title>
+<script>try{var th=localStorage.getItem('qoods_theme')||'light';document.documentElement.setAttribute('data-theme',th);var lg=localStorage.getItem('qoods_lang')||'sv';document.documentElement.lang=lg;document.documentElement.dir=lg==='ar'?'rtl':'ltr';}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Mulish:wght@400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><b>Qoods</b> <span>bageri</span></a>
+    <nav class="nav-links">
+      <a href="index.html#menu" data-i18n="nav.menu">Meny</a>
+      <a href="index.html#about" data-i18n="nav.about">Om oss</a>
+      <a href="index.html#reviews" data-i18n="nav.reviews">Omdömen</a>
+      <a href="index.html#visit" data-i18n="nav.visit">Hitta hit</a>
+      <a href="index.html#contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="sv" onclick="setLang('sv')">SV</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="theme-toggle" data-theme-toggle onclick="toggleTheme()" aria-label="Theme">☾</button>
+      <a href="cart.html" class="cart-link"><span data-i18n="nav.cart">Kundvagn</span> <span class="cart-badge" data-cart-count>0</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="pd">
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="index.html" data-i18n="crumb.home">Hem</a> ·
+      <a href="index.html#menu" data-i18n="crumb.menu">Meny</a> ·
+      <span id="crumbName"></span>
+    </div>
+    <div class="pd-grid" id="pdGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="foot-bottom" data-i18n="foot.rights">© 2026 Qoods Bakery. Alla rättigheter förbehållna.</div></div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const p = productById(params.get("id")) || PRODUCTS[0];
+  let kg = 1;
+  const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
+
+  function render(){
+    document.getElementById("crumbName").textContent = pName(p.id);
+    document.getElementById("pdGrid").innerHTML = `
+      <div class="pd-media"><img src="${p.img}" alt="${pName(p.id)}"></div>
+      <div class="pd-info">
+        <div class="eyebrow">${t('pd.eyebrow')}</div>
+        <h1>${pName(p.id)}</h1>
+        <p class="desc">${pDesc(p.id)}</p>
+        <div class="pd-price">${p.price} kr <small>/ ${t('unit.kg')}</small></div>
+        <div class="qty-block">
+          <div class="qty-label">${t('pd.howmany')}</div>
+          <div>
+            <div class="stepper">
+              <button type="button" id="minus">–</button>
+              <input id="kgInput" type="number" min="0.5" step="0.5" value="${kg}">
+              <button type="button" id="plus">+</button>
+            </div>
+            <span class="kg-unit">${t('unit.kg')}</span>
+          </div>
+          <div class="line-total">${t('pd.total')} <b id="lineTotal"></b></div>
+          <div class="pd-actions">
+            <button class="btn btn-primary" id="addBtn">${t('pd.add')}</button>
+            <a class="btn btn-ghost" href="cart.html">${t('pd.gocart')}</a>
+          </div>
+          <div class="added-msg" id="addedMsg">${t('pd.added')}</div>
+        </div>
+      </div>`;
+    wire();
+  }
+
+  function wire(){
+    const input = document.getElementById("kgInput");
+    const lineTotal = document.getElementById("lineTotal");
+    const addedMsg = document.getElementById("addedMsg");
+    const paint = () => { lineTotal.textContent = fmt(p.price * kg) + " kr"; };
+    const setVal = v => { kg = Math.max(0.5, Math.round(v * 2) / 2); input.value = kg; paint(); };
+    document.getElementById("minus").onclick = () => setVal(kg - 0.5);
+    document.getElementById("plus").onclick  = () => setVal(kg + 0.5);
+    input.onchange = () => setVal(parseFloat(input.value) || 0.5);
+    document.getElementById("addBtn").onclick = () => {
+      addToCart(p.id, kg);
+      addedMsg.classList.add("show");
+      setTimeout(() => addedMsg.classList.remove("show"), 2600);
+    };
+    paint();
+  }
+
+  window.onLangApplied = render;
+  render();
+</script>
+</body>
+</html>

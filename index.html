@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qoods Bakery</title>
+<script>try{var th=localStorage.getItem('qoods_theme')||'light';document.documentElement.setAttribute('data-theme',th);var lg=localStorage.getItem('qoods_lang')||'sv';document.documentElement.lang=lg;document.documentElement.dir=lg==='ar'?'rtl':'ltr';}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Mulish:wght@400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><b>Qoods</b> <span>bageri</span></a>
+    <nav class="nav-links">
+      <a href="#menu" data-i18n="nav.menu">Meny</a>
+      <a href="#about" data-i18n="nav.about">Om oss</a>
+      <a href="#reviews" data-i18n="nav.reviews">Omdömen</a>
+      <a href="#visit" data-i18n="nav.visit">Hitta hit</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="sv" onclick="setLang('sv')">SV</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="theme-toggle" data-theme-toggle onclick="toggleTheme()" aria-label="Theme">☾</button>
+      <a href="cart.html" class="cart-link"><span data-i18n="nav.cart">Kundvagn</span> <span class="cart-badge" data-cart-count>0</span></a>
+      <a href="#menu" class="btn btn-primary nav-cta" style="padding:12px 26px" data-i18n="nav.order">Beställ online</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Orientaliska sötsaker &amp; bageri · Åstorp</div>
+      <h1 class="brand-name display" data-i18n="hero.brand">Qoods bageri</h1>
+      <p class="lead" data-i18n="hero.tagline">Ett familjebageri byggt på tålamod — handrullad filodeg, klarnat smör och pistage vi väljer för hand.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary" data-i18n="hero.explore">Utforska menyn</a>
+        <a href="#contact" class="btn btn-ghost" data-i18n="hero.order">Beställ online</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="img/hero-mosaic.jpg" alt="Assorted oriental sweets on trays">
+      <div class="float-card">
+        <div class="k" data-i18n="hero.oven_k">Färskt ur ugnen</div>
+        <div class="v" data-i18n="hero.oven_v">Bakat varje dag</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME BAND -->
+<section class="special">
+  <div class="wrap">
+    <div class="special-band">
+      <div class="eyebrow" data-i18n="welcome.eyebrow">Välkommen</div>
+      <h2 data-i18n="welcome.title">Välkommen till Qoods Bakery</h2>
+    </div>
+  </div>
+</section>
+
+<!-- MENU / SHOP GRID -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div class="eyebrow" data-i18n="menu.eyebrow">Menyn</div>
+      <h2 class="section" data-i18n="menu.title">Nybakat, gjort för att delas</h2>
+      <p data-i18n="menu.sub">Klicka på en produkt för att se den närmare, välj hur många kilo du vill ha och lägg den i kundvagnen.</p>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow" data-i18n="about.eyebrow">Vår historia</div>
+        <h2 class="section" data-i18n="about.title">Generationer av arabiska sötsaker,<br>nu bakade i Åstorp.</h2>
+        <p data-i18n="about.p1">Qoods är ett familjebageri med generationers erfarenhet av arabiska sötsaker. Det började med vårt eget bageri i Syrien 2004 — samma recept, lagda och bakade för hand.</p>
+        <p data-i18n="about.p2">2018 tog vi hantverket till Sverige. Idag bakar vi det färskt här i Åstorp: fat med pistagebaklava, varm kunafa och smörig ma'amoul, gjorda som vår familj alltid har gjort.</p>
+      </div>
+      <div class="about-media">
+        <img src="img/about-baklava.jpg" alt="Close-up of freshly cut pistachio baklava">
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature"><h3 data-i18n="feat1.h">Tid som ingrediens</h3><p data-i18n="feat1.p">Våra siraper vilar över natten och degen får ta sin tid, så varje tugga smakar som den ska.</p></div>
+      <div class="feature"><h3 data-i18n="feat2.h">Nötter vi kan namnge</h3><p data-i18n="feat2.p">Grön pistage, cashew och valnöt — utvalda för hand och rostade i små satser.</p></div>
+      <div class="feature"><h3 data-i18n="feat3.h">Inget slängs</h3><p data-i18n="feat3.p">Det vi inte säljer färskt blir smulor och godsaker för grannskapet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="reviews-head">
+      <div class="htext">
+        <div class="eyebrow" data-i18n="reviews.eyebrow">Omdömen</div>
+        <h2 class="section" data-i18n="reviews.title">Älskat av grannskapet</h2>
+        <p data-i18n="reviews.sub">Några ord från dem som tittat in på kaffe och sötsaker.</p>
+      </div>
+      <div class="rating-badge">
+        <div class="num">4.2</div>
+        <div>
+          <div class="stars">★★★★<span class="off">★</span></div>
+          <div class="meta" data-i18n="reviews.based">Baserat på 60 omdömen</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote" data-i18n="rev1"></p>
+        <div class="who">Rocío Anselmo</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★<span class="off">★</span></div>
+        <p class="quote" data-i18n="rev2"></p>
+        <div class="subratings" data-i18n="rev2.sub">Mat 5/5 · Service 4/5 · Atmosfär 3/5</div>
+        <div class="who">Z O</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote" data-i18n="rev3"></p>
+        <div class="who">Birthe Brovinius</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote" data-i18n="rev4"></p>
+        <div class="who">Wissam KHL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="visit-grid">
+      <div class="panel">
+        <div class="eyebrow" data-i18n="visit.hours_eyebrow">Öppettider</div>
+        <div class="hours-row"><span class="day" data-i18n="visit.hours_days">Måndag – söndag</span><span class="time">10:00 – 22:00</span></div>
+        <p class="note" style="margin-top:14px" data-i18n="visit.hours_note">Öppet alla dagar i veckan, året runt.</p>
+      </div>
+      <div class="panel">
+        <div class="eyebrow" data-i18n="visit.find_eyebrow">Hitta hit</div>
+        <h3>Östra vägen 2, Åstorp, Sweden</h3>
+        <div class="contact-line"><a href="tel:+46720207210">072-020 72 10</a></div>
+        <div class="contact-line"><a href="mailto:info@qoodskakorab.se">info@qoodskakorab.se</a></div>
+        <p class="note" data-i18n="visit.find_note">Färska arabiska och turkiska sötsaker att ta med — baklava, kunafa, ma'amoul och mer.</p>
+      </div>
+    </div>
+    <div class="map">
+      <iframe class="map-embed" src="https://maps.google.com/maps?q=%C3%96stra%20v%C3%A4gen%202%2C%20%C3%85storp&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Karta"></iframe>
+      <div class="map-overlay">
+        <a class="map-badge" href="https://www.google.com/maps/search/?api=1&query=%C3%96stra+v%C3%A4gen+2%2C+%C3%85storp" target="_blank" rel="noopener">📍 Östra vägen 2, Åstorp <span class="cta" data-i18n="visit.directions">Öppna i Google Maps ↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-head">
+      <div class="eyebrow" data-i18n="contact.eyebrow">Kontakt &amp; beställningar</div>
+      <h2 class="section" data-i18n="contact.title">Kom förbi, eller berätta vad du behöver</h2>
+      <p data-i18n="contact.sub">För tårtor, catering och större beställningar — skicka detaljerna så återkommer vi inom en arbetsdag.</p>
+    </div>
+    <div class="form-card">
+      <form onsubmit="return false">
+        <div class="form-grid">
+          <div class="field"><label data-i18n="form.name">Namn</label><input type="text" data-i18n-ph="form.name_ph" placeholder="Ditt namn"></div>
+          <div class="field"><label data-i18n="form.email">E-post</label><input type="email" data-i18n-ph="form.email_ph" placeholder="du@exempel.se"></div>
+          <div class="field"><label data-i18n="form.type">Typ av beställning</label>
+            <select>
+              <option data-i18n="opt.general">Allmän fråga</option>
+              <option data-i18n="opt.cake">Tårta</option>
+              <option data-i18n="opt.gift">Presentask</option>
+              <option data-i18n="opt.catering">Catering / större beställning</option>
+            </select>
+          </div>
+          <div class="field"><label data-i18n="form.needed">Behövs senast</label><input type="date"></div>
+          <div class="field full"><label data-i18n="form.details">Detaljer</label><textarea data-i18n-ph="form.details_ph" placeholder="Antal portioner, smaker, allergier, upphämtningstid…"></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit" data-i18n="form.send">Skicka förfrågan</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><b>Qoods</b> <span>bageri</span></div>
+        <p data-i18n="foot.tagline">Ett familjebageri med arabiska sötsaker. Handgjort, ärligt bakat, färskt varje dag.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="foot.hours_h">Öppettider</h4>
+        <div class="foot-row"><span data-i18n="visit.hours_days">Måndag – söndag</span><span>10:00 – 22:00</span></div>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="foot.visit_h">Hitta hit</h4>
+        <div class="foot-text" style="font-size:.95rem;line-height:1.9">Östra vägen 2, Åstorp, Sweden<br>072-020 72 10<br>info@qoodskakorab.se</div>
+      </div>
+    </div>
+    <div class="foot-bottom" data-i18n="foot.rights">© 2026 Qoods Bakery. Alla rättigheter förbehållna.</div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script>
+  const grid = document.getElementById("productGrid");
+  function renderGrid(){
+    grid.innerHTML = PRODUCTS.map(p => `
+      <a class="pcard" href="product.html?id=${p.id}">
+        <div class="thumb"><img src="${p.img}" alt="${pName(p.id)}"></div>
+        <div class="pbody">
+          <div class="pname">${pName(p.id)}</div>
+          <div class="pprice">${p.price} ${t('product.per_kg')}</div>
+          <div class="pview">${t('product.view')}</div>
+        </div>
+      </a>`).join("");
+  }
+  window.onLangApplied = renderGrid;
+  renderGrid();
+</script>
+</body>
+</html>
