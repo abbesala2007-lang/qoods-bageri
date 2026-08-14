@@ -195,7 +195,7 @@ footer{background:var(--cream-top);border-top:1px solid var(--line);padding:64px
 
 @media (max-width:1100px){.product-grid{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:900px){
-  .hero-grid,.about-grid,.cat,.visit-grid,.form-grid,.foot-grid,.pd-grid,.cart-layout,.review-grid{grid-template-columns:1fr}
+  .hero-grid,.about-grid,.cat,.visit-grid,.form-grid,.foot-grid,.pd-grid,.cart-layout,.review-grid,.pd-extra{grid-template-columns:1fr}
   .nav-links{display:none}
   .features{grid-template-columns:1fr}
   .hero-media img,.about-media img,.img-placeholder{height:400px}
@@ -235,6 +235,21 @@ html[dir="rtl"] .item-title h4{font-weight:600}
 .qty-note.pickup{color:#8a5a38;background:#f3e6da}
 :root[data-theme="dark"] .qty-note{color:#c6b8a4;background:#221a12}
 :root[data-theme="dark"] .qty-note.pickup{color:#e0b088;background:#2a1e14}
+
+/* ===== Ingredients + nutrition ===== */
+.pd-extra{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;margin-top:52px;padding-top:44px;border-top:1px solid var(--line)}
+.pd-h{font-family:var(--serif);font-weight:500;font-size:1.4rem;color:var(--ink);margin-bottom:16px}
+.ing-text{font-size:1rem;line-height:1.75;color:var(--body)}
+.nutr-table{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.nutr-row{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;font-size:.98rem}
+.nutr-row + .nutr-row{border-top:1px solid var(--line)}
+.nutr-row > span:first-child{color:#6b5d4b}
+.nutr-row > span:last-child{font-family:var(--serif);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.nutr-row.sub > span:first-child{padding-inline-start:20px;color:#9a8b76;font-size:.9rem}
+.nutr-row.sub > span:last-child{font-family:var(--sans);color:#6b5d4b;font-size:.92rem}
+:root[data-theme="dark"] .nutr-row > span:first-child{color:#c6b8a4}
+:root[data-theme="dark"] .nutr-row.sub > span:first-child,
+:root[data-theme="dark"] .nutr-row.sub > span:last-child{color:#a99a86}
 
 /* ===== Dark mode ===== */
 :root[data-theme="dark"]{

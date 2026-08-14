@@ -42,7 +42,9 @@ const T = {
     "crumb.home":"Hem","crumb.menu":"Meny","unit.kg":"kg",
     "cart.eyebrow":"Kundvagn","cart.title":"Din kundvagn","cart.empty":"Din kundvagn är tom just nu.","cart.browse":"Bläddra i menyn",
     "cart.summary":"Ordersammanfattning","cart.items":"Varor","cart.subtotal":"Delsumma","cart.total":"Totalt","cart.request":"Beställ detta",
-    "cart.fineprint":"Upphämtning i butik · vi bekräftar inom en arbetsdag","cart.remove":"Ta bort"
+    "cart.fineprint":"Upphämtning i butik · vi bekräftar inom en arbetsdag","cart.remove":"Ta bort",
+    "ing.title":"Ingredienser","nutr.title":"Näringsvärde (per 100 g)",
+    "nutr.energy":"Energi","nutr.fat":"Fett","nutr.satfat":"varav mättat fett","nutr.carb":"Kolhydrater","nutr.sugar":"varav sockerarter","nutr.fiber":"Fiber","nutr.protein":"Protein","nutr.salt":"Salt"
   },
   en: {
     "nav.menu":"Menu","nav.about":"About","nav.reviews":"Reviews","nav.visit":"Visit","nav.contact":"Contact",
@@ -86,7 +88,9 @@ const T = {
     "crumb.home":"Home","crumb.menu":"Menu","unit.kg":"kg",
     "cart.eyebrow":"Shopping cart","cart.title":"Your cart","cart.empty":"Your cart is empty for now.","cart.browse":"Browse the menu",
     "cart.summary":"Order summary","cart.items":"Items","cart.subtotal":"Subtotal","cart.total":"Total","cart.request":"Request this order",
-    "cart.fineprint":"Pickup in store · we confirm within one working day","cart.remove":"Remove"
+    "cart.fineprint":"Pickup in store · we confirm within one working day","cart.remove":"Remove",
+    "ing.title":"Ingredients","nutr.title":"Nutrition (per 100 g)",
+    "nutr.energy":"Energy","nutr.fat":"Fat","nutr.satfat":"of which saturates","nutr.carb":"Carbohydrate","nutr.sugar":"of which sugars","nutr.fiber":"Fibre","nutr.protein":"Protein","nutr.salt":"Salt"
   },
   ar: {
     "nav.menu":"القائمة","nav.about":"من نحن","nav.reviews":"التقييمات","nav.visit":"زورونا","nav.contact":"تواصل معنا",
@@ -130,7 +134,9 @@ const T = {
     "crumb.home":"الرئيسية","crumb.menu":"القائمة","unit.kg":"كغ",
     "cart.eyebrow":"سلة التسوق","cart.title":"سلتك","cart.empty":"سلتك فارغة حاليًا.","cart.browse":"تصفّح القائمة",
     "cart.summary":"ملخص الطلب","cart.items":"العناصر","cart.subtotal":"المجموع الفرعي","cart.total":"الإجمالي","cart.request":"اطلب هذا",
-    "cart.fineprint":"الاستلام من المتجر · نؤكد خلال يوم عمل واحد","cart.remove":"إزالة"
+    "cart.fineprint":"الاستلام من المتجر · نؤكد خلال يوم عمل واحد","cart.remove":"إزالة",
+    "ing.title":"المكونات","nutr.title":"القيمة الغذائية (لكل 100 غ)",
+    "nutr.energy":"الطاقة","nutr.fat":"الدهون","nutr.satfat":"منها دهون مشبعة","nutr.carb":"الكربوهيدرات","nutr.sugar":"منها سكريات","nutr.fiber":"الألياف","nutr.protein":"البروتين","nutr.salt":"الملح"
   }
 };
 
@@ -185,6 +191,81 @@ const P = {
     en:{name:"Sesame cookies",desc:"Crunchy sesame-coated fingers, sold by the bag."},
     ar:{name:"أصابع السمسم",desc:"أصابع مقرمشة مغطّاة بالسمسم، تُباع بالكيس."}}
 };
+
+/* ===== Ingredients + nutrition per 100 g (from product labels) ===== */
+const _ingBaklava = {
+  sv:"Vetemjöl (mjölbehandlingsmedel E300 (askorbinsyra)), majsstärkelse, socker, vatten, pistaschnötter, cashewnötter, mjölkfett (arom), vegetabiliskt fett (palmolja), färg (betakaroten E160a), salt, citronsyra (E330).",
+  en:"Wheat flour (flour treatment agent E300 (ascorbic acid)), corn starch, sugar, water, pistachios, cashews, milk fat (flavouring), vegetable fat (palm oil), colour (beta-carotene E160a), salt, citric acid (E330).",
+  ar:"دقيق القمح (عامل معالجة الدقيق E300 (حمض الأسكوربيك))، نشا الذرة، سكر، ماء، فستق حلبي، كاجو، دهن الحليب (نكهة)، دهن نباتي (زيت النخيل)، لون (بيتا كاروتين E160a)، ملح، حمض الستريك (E330)."
+};
+const _nutrBaklavaMix = [
+  {k:"nutr.energy",v:"1915 kJ / 463 kcal"},{k:"nutr.fat",v:"27 g"},{k:"nutr.satfat",v:"2,2 g",sub:true},
+  {k:"nutr.carb",v:"49 g"},{k:"nutr.sugar",v:"22 g",sub:true},{k:"nutr.fiber",v:"1,66 g"},{k:"nutr.protein",v:"6 g"},{k:"nutr.salt",v:"0,1 g"}
+];
+const PN = {
+  "baklava-cashew":{ ing:_ingBaklava, nutr:[
+    {k:"nutr.energy",v:"1915 kJ / 463 kcal"},{k:"nutr.fat",v:"27 g"},{k:"nutr.satfat",v:"2,2 g",sub:true},
+    {k:"nutr.carb",v:"49 g"},{k:"nutr.sugar",v:"22 g",sub:true},{k:"nutr.protein",v:"6 g"},{k:"nutr.salt",v:"0,1 g"}
+  ]},
+  "baklava-platter":{ ing:_ingBaklava, nutr:_nutrBaklavaMix },
+  "baklava-box":{ ing:_ingBaklava, nutr:_nutrBaklavaMix },
+  "baklava-luxury":{ ing:_ingBaklava, nutr:_nutrBaklavaMix },
+  "hariseh":{
+    ing:{
+      sv:"Mannagryn, socker, pistaschnötter, mjölkfett, sesamolja 3%, vatten, citronsyra (E330), bakpulver, salt.",
+      en:"Semolina, sugar, pistachios, milk fat, sesame oil 3%, water, citric acid (E330), baking powder, salt.",
+      ar:"سميد، سكر، فستق حلبي، دهن الحليب، زيت السمسم 3%، ماء، حمض الستريك (E330)، مسحوق الخبز، ملح."
+    },
+    nutr:[{k:"nutr.energy",v:"1976 kJ / 481 kcal"},{k:"nutr.fat",v:"21 g"},{k:"nutr.satfat",v:"3,2 g",sub:true},
+      {k:"nutr.carb",v:"45 g"},{k:"nutr.sugar",v:"24 g",sub:true},{k:"nutr.fiber",v:"2,4 g"},{k:"nutr.protein",v:"9 g"},{k:"nutr.salt",v:"1,0 g"}]
+  },
+  "petitfour":{
+    ing:{
+      sv:"Vetemjöl (mjölbehandlingsmedel E300 (askorbinsyra)), vegetabiliskt fett (palmolja, sojabönolja), färg (betakaroten E160a), socker, choklad (kakaopulver 15%, kokos, majsstärkelse, vasselpulver 10%, emulgeringsmedel (sojabönolja)), strössel, mjölkpulver 7% (fettreducerat), ägg, vanillin, arom, citronsyra (E330), salt, färg (vatten, karmin E120), surhetsreglerande medel (citronsyra E330), konserveringsmedel (kaliumsorbat E202), fuktighetsbevarande medel (glycerol E422), natriumbensoat (E211), färgämne (lutein E161b), briljantblått (E133).",
+      en:"Wheat flour (flour treatment agent E300 (ascorbic acid)), vegetable fat (palm oil, soybean oil), colour (beta-carotene E160a), sugar, chocolate (cocoa powder 15%, coconut, corn starch, whey powder 10%, emulsifier (soybean oil)), sprinkles, milk powder 7% (fat-reduced), egg, vanillin, flavouring, citric acid (E330), salt, colour (water, carmine E120), acidity regulator (citric acid E330), preservative (potassium sorbate E202), humectant (glycerol E422), sodium benzoate (E211), colourant (lutein E161b), brilliant blue (E133).",
+      ar:"دقيق القمح (عامل معالجة الدقيق E300 (حمض الأسكوربيك))، دهن نباتي (زيت النخيل، زيت فول الصويا)، لون (بيتا كاروتين E160a)، سكر، شوكولاتة (مسحوق الكاكاو 15%، جوز الهند، نشا الذرة، مسحوق مصل اللبن 10%، مستحلب (زيت فول الصويا))، حبيبات سكرية للتزيين، حليب مجفف 7% (قليل الدسم)، بيض، فانيلين، نكهة، حمض الستريك (E330)، ملح، لون (ماء، قرمزي E120)، منظّم حموضة (حمض الستريك E330)، مادة حافظة (سوربات البوتاسيوم E202)، عامل مرطّب (جليسرول E422)، بنزوات الصوديوم (E211)، ملوّن (لوتين E161b)، أزرق لامع (E133)."
+    },
+    nutr:[{k:"nutr.energy",v:"1016 kJ / 458 kcal"},{k:"nutr.fat",v:"22,3 g"},{k:"nutr.satfat",v:"11 g",sub:true},
+      {k:"nutr.carb",v:"69 g"},{k:"nutr.sugar",v:"35 g",sub:true},{k:"nutr.fiber",v:"3,45 g"},{k:"nutr.protein",v:"9 g"},{k:"nutr.salt",v:"0,80 g"}]
+  },
+  "ghureyba":{
+    ing:{
+      sv:"Vetemjöl (mjölbehandlingsmedel E300 (askorbinsyra)), vegetabiliskt fett (palmolja), färg (betakaroten E160a), mjölkfett, socker, mjölkpulver 5%, vasselpulver 3%, vanilj, arom.",
+      en:"Wheat flour (flour treatment agent E300 (ascorbic acid)), vegetable fat (palm oil), colour (beta-carotene E160a), milk fat, sugar, milk powder 5%, whey powder 3%, vanilla, flavouring.",
+      ar:"دقيق القمح (عامل معالجة الدقيق E300 (حمض الأسكوربيك))، دهن نباتي (زيت النخيل)، لون (بيتا كاروتين E160a)، دهن الحليب، سكر، حليب مجفف 5%، مسحوق مصل اللبن 3%، فانيليا، نكهة."
+    },
+    nutr:[{k:"nutr.energy",v:"2090 kJ / 490 kcal"},{k:"nutr.fat",v:"21 g"},{k:"nutr.satfat",v:"11 g",sub:true},
+      {k:"nutr.carb",v:"54 g"},{k:"nutr.sugar",v:"33 g",sub:true},{k:"nutr.fiber",v:"4,4 g"},{k:"nutr.protein",v:"8,9 g"},{k:"nutr.salt",v:"0,1 g"}]
+  },
+  "barazek":{
+    ing:{
+      sv:"Vetemjöl (askorbinsyra, mjölbehandlingsmedel E300), vegetabiliskt fett (palmolja), färg (betakaroten E160a), sesamfrön 36%, socker, vasselpulver 6%, anis, vanillin, arom, citronsyra (E330), salt.",
+      en:"Wheat flour (ascorbic acid, flour treatment agent E300), vegetable fat (palm oil), colour (beta-carotene E160a), sesame seeds 36%, sugar, whey powder 6%, anise, vanillin, flavouring, citric acid (E330), salt.",
+      ar:"دقيق القمح (حمض الأسكوربيك، عامل معالجة الدقيق E300)، دهن نباتي (زيت النخيل)، لون (بيتا كاروتين E160a)، بذور السمسم 36%، سكر، مسحوق مصل اللبن 6%، يانسون، فانيلين، نكهة، حمض الستريك (E330)، ملح."
+    },
+    nutr:[{k:"nutr.energy",v:"2166 kJ / 518 kcal"},{k:"nutr.fat",v:"27,2 g"},{k:"nutr.satfat",v:"9,50 g",sub:true},
+      {k:"nutr.carb",v:"63,8 g"},{k:"nutr.sugar",v:"35,5 g",sub:true},{k:"nutr.fiber",v:"4,9 g"},{k:"nutr.protein",v:"4,9 g"},{k:"nutr.salt",v:"0,5 g"}]
+  },
+  "sesame-cookies":{
+    ing:{
+      sv:"Vetemjöl (mjölbehandlingsmedel E300 (askorbinsyra)), vegetabiliskt fett (palmolja), färg (betakaroten E160a), socker, sesamfrön 22%, vasselpulver 12%, mjölkpulver 4%, kokos, majsstärkelse, vatten, fänkål, anis, vanillin, bakpulver (E503), citronsyra, salt, arom.",
+      en:"Wheat flour (flour treatment agent E300 (ascorbic acid)), vegetable fat (palm oil), colour (beta-carotene E160a), sugar, sesame seeds 22%, whey powder 12%, milk powder 4%, coconut, corn starch, water, fennel, anise, vanillin, baking powder (E503), citric acid, salt, flavouring.",
+      ar:"دقيق القمح (عامل معالجة الدقيق E300 (حمض الأسكوربيك))، دهن نباتي (زيت النخيل)، لون (بيتا كاروتين E160a)، سكر، بذور السمسم 22%، مسحوق مصل اللبن 12%، حليب مجفف 4%، جوز الهند، نشا الذرة، ماء، شمر، يانسون، فانيلين، مسحوق الخبز (E503)، حمض الستريك، ملح، نكهة."
+    },
+    nutr:[{k:"nutr.energy",v:"2029 kJ / 483 kcal"},{k:"nutr.fat",v:"18 g"},{k:"nutr.satfat",v:"2,8 g",sub:true},
+      {k:"nutr.carb",v:"71 g"},{k:"nutr.sugar",v:"49 g",sub:true},{k:"nutr.fiber",v:"2,8 g"},{k:"nutr.protein",v:"8,4 g"},{k:"nutr.salt",v:"0,1 g"}]
+  },
+  "maamoul":{
+    ing:{
+      sv:"Vetemjöl (mjölbehandlingsmedel E300 (askorbinsyra)), dadlar, vegetabiliskt fett (palmolja), färg (betakaroten E160a), vasselpulver 11%, mjölkfett 9%, socker, mjölkpulver 7%, ägg, fänkål, vanillin, sesamfrö 6%, pistaschnötter, anis, salt, arom, svartkummin.",
+      en:"Wheat flour (flour treatment agent E300 (ascorbic acid)), dates, vegetable fat (palm oil), colour (beta-carotene E160a), whey powder 11%, milk fat 9%, sugar, milk powder 7%, egg, fennel, vanillin, sesame seeds 6%, pistachios, anise, salt, flavouring, black cumin.",
+      ar:"دقيق القمح (عامل معالجة الدقيق E300 (حمض الأسكوربيك))، تمر، دهن نباتي (زيت النخيل)، لون (بيتا كاروتين E160a)، مسحوق مصل اللبن 11%، دهن الحليب 9%، سكر، حليب مجفف 7%، بيض، شمر، فانيلين، بذور السمسم 6%، فستق حلبي، يانسون، ملح، نكهة، حبة البركة."
+    },
+    nutr:[{k:"nutr.energy",v:"1016 kJ / 458 kcal"},{k:"nutr.fat",v:"22,3 g"},{k:"nutr.satfat",v:"11 g",sub:true},
+      {k:"nutr.carb",v:"69 g"},{k:"nutr.sugar",v:"35 g",sub:true},{k:"nutr.protein",v:"9 g"},{k:"nutr.salt",v:"0,80 g"}]
+  }
+};
+const pIng = id => { const l = currentLang(); const d = PN[id]; return d ? (d.ing[l] || d.ing.en) : ""; };
 
 const LANG_KEY = "qoods_lang";
 const currentLang = () => localStorage.getItem(LANG_KEY) || "sv";

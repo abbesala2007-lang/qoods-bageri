@@ -42,6 +42,7 @@
       <span id="crumbName"></span>
     </div>
     <div class="pd-grid" id="pdGrid"></div>
+    <div id="pdExtra"></div>
   </div>
 </section>
 
@@ -99,6 +100,25 @@
         </div>
       </div>`;
     wire();
+    renderExtra();
+  }
+
+  function renderExtra(){
+    const el = document.getElementById("pdExtra");
+    const d = (typeof PN !== "undefined") ? PN[p.id] : null;
+    if (!d){ el.innerHTML = ""; return; }
+    const rows = d.nutr.map(n => `<div class="nutr-row${n.sub ? ' sub' : ''}"><span>${t(n.k)}</span><span>${n.v}</span></div>`).join("");
+    el.innerHTML = `
+      <div class="pd-extra">
+        <div class="pd-block">
+          <h2 class="pd-h">${t('ing.title')}</h2>
+          <p class="ing-text">${pIng(p.id)}</p>
+        </div>
+        <div class="pd-block">
+          <h2 class="pd-h">${t('nutr.title')}</h2>
+          <div class="nutr-table">${rows}</div>
+        </div>
+      </div>`;
   }
 
   function wire(){
