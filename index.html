@@ -45,7 +45,7 @@
       <p class="lead" data-i18n="hero.tagline">Ett familjebageri byggt på tålamod — handrullad filodeg, klarnat smör och pistage vi väljer för hand.</p>
       <div class="hero-actions">
         <a href="#menu" class="btn btn-primary" data-i18n="hero.explore">Utforska menyn</a>
-        <a href="#contact" class="btn btn-ghost" data-i18n="hero.order">Beställ online</a>
+        <a href="#menu" class="btn btn-ghost" data-i18n="hero.order">Beställ online</a>
       </div>
     </div>
     <div class="hero-media">
@@ -181,22 +181,13 @@
       <p data-i18n="contact.sub">För tårtor, catering och större beställningar — skicka detaljerna så återkommer vi inom en arbetsdag.</p>
     </div>
     <div class="form-card">
-      <form onsubmit="return false">
+      <form id="contactForm">
         <div class="form-grid">
-          <div class="field"><label data-i18n="form.name">Namn</label><input type="text" data-i18n-ph="form.name_ph" placeholder="Ditt namn"></div>
-          <div class="field"><label data-i18n="form.email">E-post</label><input type="email" data-i18n-ph="form.email_ph" placeholder="du@exempel.se"></div>
-          <div class="field"><label data-i18n="form.type">Typ av beställning</label>
-            <select>
-              <option data-i18n="opt.general">Allmän fråga</option>
-              <option data-i18n="opt.cake">Tårta</option>
-              <option data-i18n="opt.gift">Presentask</option>
-              <option data-i18n="opt.catering">Catering / större beställning</option>
-            </select>
-          </div>
-          <div class="field"><label data-i18n="form.needed">Behövs senast</label><input type="date"></div>
-          <div class="field full"><label data-i18n="form.details">Detaljer</label><textarea data-i18n-ph="form.details_ph" placeholder="Antal portioner, smaker, allergier, upphämtningstid…"></textarea></div>
+          <div class="field"><label data-i18n="form.name">Namn</label><input id="cName" type="text" data-i18n-ph="form.name_ph" placeholder="Ditt namn"></div>
+          <div class="field"><label data-i18n="form.email">E-post</label><input id="cEmail" type="email" data-i18n-ph="form.email_ph" placeholder="du@exempel.se"></div>
+          <div class="field full"><label data-i18n="form.details">Meddelande</label><textarea id="cMsg" data-i18n-ph="form.details_ph" placeholder="Vad undrar du?"></textarea></div>
         </div>
-        <div class="form-actions"><button class="btn btn-primary" type="submit" data-i18n="form.send">Skicka förfrågan</button></div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit" data-i18n="form.send">Skicka meddelande</button></div>
       </form>
     </div>
   </div>
@@ -241,6 +232,18 @@
   }
   window.onLangApplied = renderGrid;
   renderGrid();
+
+  // Contact form = questions only -> opens the customer's email app to info@qoodskakorab.se
+  const cf = document.getElementById("contactForm");
+  if (cf) cf.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = (document.getElementById("cName").value || "").trim();
+    const email = (document.getElementById("cEmail").value || "").trim();
+    const msg = (document.getElementById("cMsg").value || "").trim();
+    const subject = encodeURIComponent("Fråga – Qoods Bageri" + (name ? " (" + name + ")" : ""));
+    const body = encodeURIComponent(msg + "\n\n—\n" + name + (email ? " · " + email : ""));
+    window.location.href = "mailto:info@qoodskakorab.se?subject=" + subject + "&body=" + body;
+  });
 </script>
 </body>
 </html>

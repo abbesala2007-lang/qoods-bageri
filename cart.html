@@ -96,14 +96,16 @@
           <div class="sum-row"><span>${t('cart.items')}</span><span>${cart.length}</span></div>
           <div class="sum-row"><span>${t('cart.subtotal')}</span><span>${fmt(subtotal)} kr</span></div>
           <div class="sum-row total"><span>${t('cart.total')}</span><span>${fmt(subtotal)} kr</span></div>
-          <a class="btn btn-primary" href="index.html#contact">${t('cart.request')}</a>
-          <div class="fineprint">${t('cart.fineprint')}</div>
+          <button class="btn btn-primary" id="payBtn" style="width:100%">${t('cart.request')}</button>
+          <div class="fineprint" id="payNote">${t('cart.fineprint')}</div>
         </div>
       </div>`;
 
     root.querySelectorAll("[data-inc]").forEach(b => b.onclick = () => { const p=productById(b.dataset.inc); setQty(p.id, getQty(p.id)+stepQty(p)); render(); });
     root.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => { const p=productById(b.dataset.dec); setQty(p.id, getQty(p.id)-stepQty(p)); render(); });
     root.querySelectorAll("[data-remove]").forEach(b => b.onclick = () => { removeFromCart(b.dataset.remove); render(); });
+    const pay = root.querySelector("#payBtn");
+    if (pay) pay.onclick = () => { const n = root.querySelector("#payNote"); if (n) n.textContent = t('cart.pay_soon'); };
   }
 
   window.onLangApplied = render;
