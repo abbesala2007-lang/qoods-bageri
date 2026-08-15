@@ -1,0 +1,13 @@
+# NEVER commit secrets. API keys live on the backend as environment variables — never here.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*secret*
+*credential*
+service-account*.json
+node_modules/
+.DS_Store
+Thumbs.db
