@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qoods Bageri</title>
+<script>try{var th=localStorage.getItem('qoods_theme')||'light';document.documentElement.setAttribute('data-theme',th);var lg=localStorage.getItem('qoods_lang')||'sv';document.documentElement.lang=lg;document.documentElement.dir=lg==='ar'?'rtl':'ltr';}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Mulish:wght@400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .ty-wrap{max-width:680px;margin:0 auto;padding:64px 24px 90px;text-align:center}
+  .ty-check{width:88px;height:88px;color:#4e8a3f;margin:0 auto 26px}
+  .ty-check circle{stroke-dasharray:214;stroke-dashoffset:214;animation:tyC .6s ease forwards}
+  .ty-check path{stroke-dasharray:60;stroke-dashoffset:60;animation:tyC .45s .5s ease forwards}
+  @keyframes tyC{to{stroke-dashoffset:0}}
+  @media (prefers-reduced-motion:reduce){.ty-check circle,.ty-check path{animation:none;stroke-dashoffset:0}}
+  .ty-wrap h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4vw,2.7rem);color:var(--ink);margin-bottom:12px}
+  .ty-wrap .ty-sub{color:var(--body);font-size:1.08rem;max-width:44ch;margin:0 auto}
+  .order-card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-sm);padding:34px 32px;margin:38px 0 0;text-align:start}
+  .oc-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:20px}
+  .oc-meta .oc-label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700}
+  .oc-meta .oc-val{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-top:3px}
+  .oc-line{display:flex;justify-content:space-between;gap:18px;padding:11px 0;font-size:1rem}
+  .oc-line .n{color:var(--body)}
+  .oc-line .v{font-family:var(--serif);color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .oc-items{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px 0;margin:18px 0}
+  .oc-total{display:flex;justify-content:space-between;padding-top:16px;margin-top:8px;border-top:2px solid var(--line);font-family:var(--serif);font-size:1.35rem;color:var(--ink)}
+  .ty-note{margin-top:26px;font-size:.95rem;color:var(--body);max-width:46ch;margin-inline:auto}
+  .ty-note a{color:var(--brown);font-weight:600}
+  .ty-actions{margin-top:30px}
+  .ty-foot{margin-top:40px;font-size:.85rem;color:#9c8f7c}
+  .ty-foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><b>Qoods</b> <span>bageri</span></a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="sv" onclick="setLang('sv')">SV</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="theme-toggle" data-theme-toggle onclick="toggleTheme()" aria-label="Theme">☾</button>
+    </div>
+  </div>
+</header>
+
+<section class="ty-wrap">
+  <svg class="ty-check" viewBox="0 0 72 72" aria-hidden="true">
+    <circle cx="36" cy="36" r="34" fill="none" stroke="currentColor" stroke-width="3"/>
+    <path d="M22 37.5 l9.5 9.5 l19 -22.5" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <h1 data-i18n="ty.title">Tack för din beställning!</h1>
+  <p class="ty-sub" data-i18n="ty.sub">Vi har tagit emot din beställning och förbereder den.</p>
+
+  <div id="orderRoot"></div>
+
+  <p class="ty-note" data-i18n="ty.questions">Har du frågor om din beställning? Svara på ditt bekräftelsemejl eller kontakta oss på info@qoodskakorab.se.</p>
+  <div class="ty-actions"><a href="index.html" class="btn btn-primary" data-i18n="ty.back">Tillbaka till butiken</a></div>
+  <div class="ty-foot"><b>Qoods Kakor AB</b> · Org.nr <span id="orgNo">—</span> · qoodskakorab.se</div>
+</section>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script>
+  const q = new URLSearchParams(location.search);
+  const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
+  const ORG_NO = "—"; // TODO: replace with Qoods Kakor AB organisationsnummer
+  document.getElementById("orgNo").textContent = ORG_NO;
+
+  // Order data: filled by the payment success redirect (?order=&pay=&name=&address=&ship=).
+  // Items come from the cart snapshot; fall back to a stored snapshot if the cart was cleared.
+  function orderItems(){
+    let cart = [];
+    try { cart = JSON.parse(localStorage.getItem("qoods_cart_v2")) || []; } catch(e){}
+    if (!cart.length){ try { cart = JSON.parse(sessionStorage.getItem("qoods_last_order")) || []; } catch(e){} }
+    return cart;
+  }
+
+  function render(){
+    const root = document.getElementById("orderRoot");
+    const items = orderItems();
+    if (!items.length && !q.get("order")){
+      root.innerHTML = `<div class="order-card" style="text-align:center;color:var(--body)">${t('ty.noorder')}</div>`;
+      return;
+    }
+    // keep a snapshot so a reload still shows the order after the cart is cleared
+    if (items.length) sessionStorage.setItem("qoods_last_order", JSON.stringify(items));
+
+    const orderNr = q.get("order") || "—";
+    const pay = q.get("pay") || "Swish / Klarna";
+    const address = q.get("address");
+    const ship = q.get("ship") != null ? parseFloat(q.get("ship")) : 0;
+
+    let subtotal = 0;
+    const rows = items.map(it => {
+      const p = productById(it.id); if (!p) return "";
+      const lt = lineTotal(p, it.qty); subtotal += lt;
+      const qtyLabel = p.type === "kg" ? `${fmt(it.qty)} kg` : `${it.qty} ×`;
+      return `<div class="oc-line"><span class="n">${qtyLabel} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
+    }).join("");
+
+    const total = subtotal + (isNaN(ship) ? 0 : ship);
+    const shipText = (!ship || isNaN(ship)) ? `${t('ty.pickup')}` : `${fmt(ship)} kr`;
+
+    root.innerHTML = `
+      <div class="order-card">
+        <div class="oc-head">
+          <div class="oc-meta"><div class="oc-label">${t('ty.ordernr')}</div><div class="oc-val">#${orderNr}</div></div>
+          <div class="oc-meta" style="text-align:end"><div class="oc-label">${t('ty.payment')}</div><div class="oc-val">${pay}</div></div>
+        </div>
+        ${address ? `<div class="oc-line"><span class="n">${t('ty.address')}</span><span class="v" style="max-width:60%;white-space:normal;text-align:end">${address}</span></div>` : ""}
+        <div style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:14px">${t('ty.items')}</div>
+        <div class="oc-items">${rows}</div>
+        <div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${shipText}</span></div>
+        <div class="oc-total"><span>${t('ty.total')}</span><span>${fmt(total)} kr</span></div>
+      </div>`;
+
+    // Order placed → clear the live cart (snapshot already saved)
+    localStorage.removeItem("qoods_cart_v2");
+    if (typeof updateCartBadge === "function") updateCartBadge();
+  }
+
+  window.onLangApplied = render;
+  render();
+</script>
+</body>
+</html>
