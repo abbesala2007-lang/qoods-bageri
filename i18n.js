@@ -47,7 +47,7 @@ const T = {
     "nutr.energy":"Energi","nutr.fat":"Fett","nutr.satfat":"varav mättat fett","nutr.carb":"Kolhydrater","nutr.sugar":"varav sockerarter","nutr.fiber":"Fiber","nutr.protein":"Protein","nutr.salt":"Salt",
     "ty.title":"Tack för din beställning!","ty.sub":"Vi har tagit emot din beställning och förbereder den.",
     "ty.ordernr":"Ordernummer","ty.payment":"Betalsätt","ty.address":"Leveransadress","ty.pickup":"Upphämtning i butik",
-    "ty.items":"Beställda varor","ty.shipping":"Frakt","ty.total":"Totalt inkl. moms",
+    "ty.items":"Beställda varor","ty.shipping":"Frakt","ty.delivery":"Leverans","ty.total":"Totalt inkl. moms","ty.vat":"varav moms (12 %)",
     "ty.questions":"Har du frågor om din beställning? Svara på ditt bekräftelsemejl eller kontakta oss på info@qoodskakorab.se.",
     "ty.back":"Tillbaka till butiken","ty.noorder":"Vi hittar ingen beställning just nu.","ty.free":"Ingår"
   },
@@ -98,7 +98,7 @@ const T = {
     "nutr.energy":"Energy","nutr.fat":"Fat","nutr.satfat":"of which saturates","nutr.carb":"Carbohydrate","nutr.sugar":"of which sugars","nutr.fiber":"Fibre","nutr.protein":"Protein","nutr.salt":"Salt",
     "ty.title":"Thank you for your order!","ty.sub":"We have received your order and are preparing it.",
     "ty.ordernr":"Order number","ty.payment":"Payment method","ty.address":"Delivery address","ty.pickup":"Store pickup",
-    "ty.items":"Ordered items","ty.shipping":"Shipping","ty.total":"Total incl. VAT",
+    "ty.items":"Ordered items","ty.shipping":"Shipping","ty.delivery":"Delivery","ty.total":"Total incl. VAT","ty.vat":"of which VAT (12%)",
     "ty.questions":"Questions about your order? Reply to your confirmation email or contact us at info@qoodskakorab.se.",
     "ty.back":"Back to the shop","ty.noorder":"We couldn't find an order right now.","ty.free":"Included"
   },
@@ -149,7 +149,7 @@ const T = {
     "nutr.energy":"الطاقة","nutr.fat":"الدهون","nutr.satfat":"منها دهون مشبعة","nutr.carb":"الكربوهيدرات","nutr.sugar":"منها سكريات","nutr.fiber":"الألياف","nutr.protein":"البروتين","nutr.salt":"الملح",
     "ty.title":"شكرًا لطلبك!","ty.sub":"لقد استلمنا طلبك ونقوم بتحضيره.",
     "ty.ordernr":"رقم الطلب","ty.payment":"طريقة الدفع","ty.address":"عنوان التوصيل","ty.pickup":"الاستلام من المتجر",
-    "ty.items":"المنتجات المطلوبة","ty.shipping":"الشحن","ty.total":"الإجمالي شامل الضريبة",
+    "ty.items":"المنتجات المطلوبة","ty.shipping":"الشحن","ty.delivery":"الاستلام","ty.total":"الإجمالي شامل الضريبة","ty.vat":"منها ضريبة القيمة المضافة (12%)",
     "ty.questions":"لديك أسئلة عن طلبك؟ رُدّ على بريد التأكيد أو تواصل معنا على info@qoodskakorab.se.",
     "ty.back":"العودة إلى المتجر","ty.noorder":"لم نعثر على طلب حاليًا.","ty.free":"مشمول"
   }

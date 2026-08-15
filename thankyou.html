@@ -105,8 +105,12 @@
       return `<div class="oc-line"><span class="n">${qtyLabel} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
     }).join("");
 
-    const total = subtotal + (isNaN(ship) ? 0 : ship);
-    const shipText = (!ship || isNaN(ship)) ? `${t('ty.pickup')}` : `${fmt(ship)} kr`;
+    const hasShip = ship && !isNaN(ship);
+    const total = subtotal + (hasShip ? ship : 0);
+    const vat = total * 12 / 112; // Swedish food VAT 12% (prices incl. VAT)
+    const deliveryRow = hasShip
+      ? `<div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${fmt(ship)} kr</span></div>`
+      : `<div class="oc-line"><span class="n">${t('ty.delivery')}</span><span class="v">${t('ty.pickup')}</span></div>`;
 
     root.innerHTML = `
       <div class="order-card">
@@ -117,8 +121,9 @@
         ${address ? `<div class="oc-line"><span class="n">${t('ty.address')}</span><span class="v" style="max-width:60%;white-space:normal;text-align:end">${address}</span></div>` : ""}
         <div style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-top:14px">${t('ty.items')}</div>
         <div class="oc-items">${rows}</div>
-        <div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${shipText}</span></div>
+        ${deliveryRow}
         <div class="oc-total"><span>${t('ty.total')}</span><span>${fmt(total)} kr</span></div>
+        <div class="oc-line" style="padding-top:6px"><span class="n" style="font-size:.9rem">${t('ty.vat')}</span><span class="v" style="font-size:.95rem">${fmt(vat)} kr</span></div>
       </div>`;
 
     // Order placed → clear the live cart (snapshot already saved)
