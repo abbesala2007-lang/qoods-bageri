@@ -233,7 +233,7 @@
   window.onLangApplied = renderGrid;
   renderGrid();
 
-  // Contact form = questions only -> opens the customer's email app to info@qoodskakorab.se
+  // Contact form = questions only -> opens Gmail compose to info@qoodskakorab.se
   const cf = document.getElementById("contactForm");
   if (cf) cf.addEventListener("submit", e => {
     e.preventDefault();
@@ -242,7 +242,9 @@
     const msg = (document.getElementById("cMsg").value || "").trim();
     const subject = encodeURIComponent("Fråga – Qoods Bageri" + (name ? " (" + name + ")" : ""));
     const body = encodeURIComponent(msg + "\n\n—\n" + name + (email ? " · " + email : ""));
-    window.location.href = "mailto:info@qoodskakorab.se?subject=" + subject + "&body=" + body;
+    const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=info@qoodskakorab.se&su=" + subject + "&body=" + body;
+    const w = window.open(gmailUrl, "_blank", "noopener");
+    if (!w) window.location.href = gmailUrl; // fallback if the new tab is blocked
   });
 </script>
 </body>
