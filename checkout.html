@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qoods Bageri</title>
+<script>try{var th=localStorage.getItem('qoods_theme')||'light';document.documentElement.setAttribute('data-theme',th);var lg=localStorage.getItem('qoods_lang')||'sv';document.documentElement.lang=lg;document.documentElement.dir=lg==='ar'?'rtl':'ltr';}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Mulish:wght@400;500;600;700&family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .checkout{padding:48px 0 90px}
+  .checkout h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4vw,2.7rem);color:var(--ink);margin-bottom:6px}
+  .checkout .co-sub{color:var(--body);margin-bottom:36px}
+  .co-h{font-family:var(--serif);font-weight:500;font-size:1.4rem;color:var(--ink);margin-bottom:20px}
+  .pickup-note{margin-top:18px;font-size:.95rem;color:var(--body);background:#f3ece0;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  :root[data-theme="dark"] .pickup-note{background:#221a12;color:#c6b8a4}
+  .co-line{display:flex;justify-content:space-between;gap:16px;padding:10px 0;font-size:.98rem}
+  .co-line .n{color:var(--body)} .co-line .v{font-family:var(--serif);color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .co-items{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0;margin:14px 0}
+  .co-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:6px;border-top:2px solid var(--line);font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+  .co-vat{display:flex;justify-content:space-between;padding-top:6px;font-size:.88rem;color:#9a8b76}
+  :root[data-theme="dark"] .co-vat{color:#a99a86}
+  .co-err{color:#b06a52;font-weight:600;font-size:.92rem;margin-top:12px;min-height:1.2em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><b>Qoods</b> <span>bageri</span></a>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="sv" onclick="setLang('sv')">SV</button>
+        <button data-lang="en" onclick="setLang('en')">EN</button>
+        <button data-lang="ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <button class="theme-toggle" data-theme-toggle onclick="toggleTheme()" aria-label="Theme">☾</button>
+      <a href="cart.html" class="cart-link"><span data-i18n="nav.cart">Kundvagn</span> <span class="cart-badge" data-cart-count>0</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="checkout">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="co.title">Kassa</div>
+    <h1 data-i18n="co.title">Kassa</h1>
+    <div id="coRoot"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="foot-bottom" data-i18n="foot.rights">© 2026 Qoods Bageri. Alla rättigheter förbehållna.</div></div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="data.js"></script>
+<script>
+  const root = document.getElementById("coRoot");
+  const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
+  const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  function nextOrderNo(){ let n = (parseInt(localStorage.getItem("qoods_order_no") || "1000", 10) || 1000) + 1; localStorage.setItem("qoods_order_no", n); return n; }
+
+  function render(){
+    const cart = getCart();
+    if (!cart.length){
+      root.innerHTML = `<div class="cart-empty"><p>${t('co.empty')}</p><a class="btn btn-primary" href="index.html#menu">${t('cart.browse')}</a></div>`;
+      // fix the H1 (no order title when empty)
+      document.querySelector('.checkout h1').textContent = t('co.title');
+      return;
+    }
+    document.querySelector('.checkout h1').textContent = t('co.title');
+
+    let subtotal = 0;
+    const rows = cart.map(it => {
+      const p = productById(it.id); if(!p) return "";
+      const lt = lineTotal(p, it.qty); subtotal += lt;
+      const q = p.type === "kg" ? `${fmt(it.qty)} kg` : `${it.qty} ×`;
+      return `<div class="co-line"><span class="n">${q} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
+    }).join("");
+    const total = subtotal;
+    const vat = total * 12 / 112;
+
+    root.innerHTML = `
+      <div class="cart-layout">
+        <div class="form-card">
+          <div class="co-h">${t('co.your_details')}</div>
+          <form id="coForm" novalidate>
+            <div class="form-grid">
+              <div class="field"><label>${t('form.name')}</label><input id="coName" type="text" placeholder="${t('form.name_ph')}"></div>
+              <div class="field"><label>${t('form.phone')}</label><input id="coPhone" type="tel" placeholder="${t('form.phone_ph')}"></div>
+              <div class="field full"><label>${t('form.email')}</label><input id="coEmail" type="email" placeholder="${t('form.email_ph')}"></div>
+            </div>
+            <div class="pickup-note">📍 ${t('co.pickup_note')}</div>
+            <div class="co-err" id="coErr"></div>
+          </form>
+        </div>
+        <div class="summary">
+          <h3>${t('co.summary')}</h3>
+          <div class="co-items">${rows}</div>
+          <div class="co-line"><span class="n">${t('ty.delivery')}</span><span class="v">${t('ty.pickup')}</span></div>
+          <div class="co-total"><span>${t('ty.total')}</span><span>${fmt(total)} kr</span></div>
+          <div class="co-vat"><span>${t('ty.vat')}</span><span>${fmt(vat)} kr</span></div>
+          <button class="btn btn-primary" id="placeBtn" style="width:100%;margin-top:22px">${t('co.place_order')}</button>
+          <div class="fineprint">${t('cart.fineprint')}</div>
+        </div>
+      </div>`;
+
+    document.getElementById("placeBtn").onclick = () => {
+      const name = document.getElementById("coName").value.trim();
+      const email = document.getElementById("coEmail").value.trim();
+      const phone = document.getElementById("coPhone").value.trim();
+      const err = document.getElementById("coErr");
+      if (!name || !email || !phone){ err.textContent = t('co.required'); return; }
+      if (!emailOk(email)){ err.textContent = t('co.invalid_email'); return; }
+      // save customer + order snapshot (the backend will later email + log this)
+      const orderNo = nextOrderNo();
+      sessionStorage.setItem("qoods_last_order", JSON.stringify(cart));
+      sessionStorage.setItem("qoods_order_customer", JSON.stringify({ name, email, phone, orderNo }));
+      location.href = "thankyou.html?order=" + orderNo + "&pay=Swish";
+    };
+  }
+
+  window.onLangApplied = render;
+  render();
+</script>
+</body>
+</html>

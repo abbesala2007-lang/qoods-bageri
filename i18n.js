@@ -49,7 +49,11 @@ const T = {
     "ty.ordernr":"Ordernummer","ty.payment":"Betalsätt","ty.address":"Leveransadress","ty.pickup":"Upphämtning i butik",
     "ty.items":"Beställda varor","ty.shipping":"Frakt","ty.delivery":"Leverans","ty.total":"Totalt inkl. moms","ty.vat":"varav moms (12 %)",
     "ty.questions":"Har du frågor om din beställning? Svara på ditt bekräftelsemejl eller kontakta oss på info@qoodskakorab.se.",
-    "ty.back":"Tillbaka till butiken","ty.noorder":"Vi hittar ingen beställning just nu.","ty.free":"Ingår"
+    "ty.back":"Tillbaka till butiken","ty.noorder":"Vi hittar ingen beställning just nu.","ty.free":"Ingår",
+    "form.phone":"Telefon","form.phone_ph":"07X XXX XX XX",
+    "co.title":"Kassa","co.your_details":"Dina uppgifter","co.summary":"Din beställning",
+    "co.pickup_note":"Din beställning hämtas i butiken på Östra vägen 2, Åstorp.",
+    "co.place_order":"Slutför beställning","co.required":"Fyll i namn, e-post och telefon.","co.invalid_email":"Kontrollera din e-postadress.","co.back_to_cart":"Tillbaka till kundvagnen","co.empty":"Din kundvagn är tom."
   },
   en: {
     "nav.menu":"Menu","nav.about":"About","nav.reviews":"Reviews","nav.visit":"Visit","nav.contact":"Contact",
@@ -100,7 +104,11 @@ const T = {
     "ty.ordernr":"Order number","ty.payment":"Payment method","ty.address":"Delivery address","ty.pickup":"Store pickup",
     "ty.items":"Ordered items","ty.shipping":"Shipping","ty.delivery":"Delivery","ty.total":"Total incl. VAT","ty.vat":"of which VAT (12%)",
     "ty.questions":"Questions about your order? Reply to your confirmation email or contact us at info@qoodskakorab.se.",
-    "ty.back":"Back to the shop","ty.noorder":"We couldn't find an order right now.","ty.free":"Included"
+    "ty.back":"Back to the shop","ty.noorder":"We couldn't find an order right now.","ty.free":"Included",
+    "form.phone":"Phone","form.phone_ph":"07X XXX XX XX",
+    "co.title":"Checkout","co.your_details":"Your details","co.summary":"Your order",
+    "co.pickup_note":"Your order is picked up in our store at Östra vägen 2, Åstorp.",
+    "co.place_order":"Place order","co.required":"Please fill in name, email and phone.","co.invalid_email":"Please check your email address.","co.back_to_cart":"Back to cart","co.empty":"Your cart is empty."
   },
   ar: {
     "nav.menu":"القائمة","nav.about":"من نحن","nav.reviews":"التقييمات","nav.visit":"زورونا","nav.contact":"تواصل معنا",
@@ -151,7 +159,11 @@ const T = {
     "ty.ordernr":"رقم الطلب","ty.payment":"طريقة الدفع","ty.address":"عنوان التوصيل","ty.pickup":"الاستلام من المتجر",
     "ty.items":"المنتجات المطلوبة","ty.shipping":"الشحن","ty.delivery":"الاستلام","ty.total":"الإجمالي شامل الضريبة","ty.vat":"منها ضريبة القيمة المضافة (12%)",
     "ty.questions":"لديك أسئلة عن طلبك؟ رُدّ على بريد التأكيد أو تواصل معنا على info@qoodskakorab.se.",
-    "ty.back":"العودة إلى المتجر","ty.noorder":"لم نعثر على طلب حاليًا.","ty.free":"مشمول"
+    "ty.back":"العودة إلى المتجر","ty.noorder":"لم نعثر على طلب حاليًا.","ty.free":"مشمول",
+    "form.phone":"الهاتف","form.phone_ph":"07X XXX XX XX",
+    "co.title":"الدفع","co.your_details":"بياناتك","co.summary":"طلبك",
+    "co.pickup_note":"يُستلم طلبك من متجرنا في Östra vägen 2، أوستورب.",
+    "co.place_order":"أكمل الطلب","co.required":"يرجى إدخال الاسم والبريد الإلكتروني والهاتف.","co.invalid_email":"يرجى التحقق من بريدك الإلكتروني.","co.back_to_cart":"العودة إلى السلة","co.empty":"سلتك فارغة."
   }
 };
 
