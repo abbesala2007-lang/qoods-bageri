@@ -11,18 +11,26 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   .checkout{padding:48px 0 90px}
-  .checkout h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4vw,2.7rem);color:var(--ink);margin-bottom:6px}
-  .checkout .co-sub{color:var(--body);margin-bottom:36px}
-  .co-h{font-family:var(--serif);font-weight:500;font-size:1.4rem;color:var(--ink);margin-bottom:20px}
-  .pickup-note{margin-top:18px;font-size:.95rem;color:var(--body);background:#f3ece0;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
-  :root[data-theme="dark"] .pickup-note{background:#221a12;color:#c6b8a4}
-  .co-line{display:flex;justify-content:space-between;gap:16px;padding:10px 0;font-size:.98rem}
+  .checkout h1{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,4vw,2.7rem);color:var(--ink);margin-bottom:30px}
+  .co-section{margin-top:30px}
+  .co-h{font-family:var(--serif);font-weight:500;font-size:1.3rem;color:var(--ink);margin-bottom:16px}
+  .opt-list{display:flex;flex-direction:column;gap:12px}
+  .opt{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;padding:15px 18px;cursor:pointer;background:var(--card);transition:.15s}
+  .opt:hover{border-color:var(--brown)}
+  .opt.sel{border-color:var(--brown);box-shadow:0 0 0 2px rgba(138,90,56,.14)}
+  .opt input{width:18px;height:18px;accent-color:var(--brown);flex:0 0 auto;margin:0}
+  .opt .otext{display:flex;flex-direction:column;gap:2px}
+  .opt .ot{font-family:var(--serif);color:var(--ink);font-size:1.05rem}
+  .opt .od{font-size:.86rem;color:var(--body)}
+  .opt .oprice{margin-inline-start:auto;font-family:var(--serif);color:var(--brown);white-space:nowrap;font-size:1rem}
+  #addrBox{margin-top:14px}
+  .co-line{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:.98rem}
   .co-line .n{color:var(--body)} .co-line .v{font-family:var(--serif);color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
-  .co-items{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0;margin:14px 0}
-  .co-total{display:flex;justify-content:space-between;padding-top:14px;margin-top:6px;border-top:2px solid var(--line);font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
-  .co-vat{display:flex;justify-content:space-between;padding-top:6px;font-size:.88rem;color:#9a8b76}
+  .co-items{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px 0;margin:8px 0 6px}
+  .co-total{display:flex;justify-content:space-between;padding-top:12px;margin-top:6px;border-top:2px solid var(--line);font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+  .co-vat{display:flex;justify-content:space-between;padding-top:6px;font-size:.86rem;color:#9a8b76}
   :root[data-theme="dark"] .co-vat{color:#a99a86}
-  .co-err{color:#b06a52;font-weight:600;font-size:.92rem;margin-top:12px;min-height:1.2em}
+  .co-err{color:#b06a52;font-weight:600;font-size:.92rem;margin-top:16px;min-height:1.2em}
 </style>
 </head>
 <body>
@@ -60,52 +68,97 @@
   const root = document.getElementById("coRoot");
   const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
   const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  const SHIP_FEE = 49, FREE_OVER = 500;
   function nextOrderNo(){ let n = (parseInt(localStorage.getItem("qoods_order_no") || "1000", 10) || 1000) + 1; localStorage.setItem("qoods_order_no", n); return n; }
 
   function render(){
     const cart = getCart();
+    document.querySelector('.checkout h1').textContent = t('co.title');
     if (!cart.length){
       root.innerHTML = `<div class="cart-empty"><p>${t('co.empty')}</p><a class="btn btn-primary" href="index.html#menu">${t('cart.browse')}</a></div>`;
-      // fix the H1 (no order title when empty)
-      document.querySelector('.checkout h1').textContent = t('co.title');
       return;
     }
-    document.querySelector('.checkout h1').textContent = t('co.title');
 
     let subtotal = 0;
-    const rows = cart.map(it => {
+    const itemRows = cart.map(it => {
       const p = productById(it.id); if(!p) return "";
       const lt = lineTotal(p, it.qty); subtotal += lt;
       const q = p.type === "kg" ? `${fmt(it.qty)} kg` : `${it.qty} ×`;
       return `<div class="co-line"><span class="n">${q} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
     }).join("");
-    const total = subtotal;
-    const vat = total * 12 / 112;
+    const postPrice = subtotal >= FREE_OVER ? t('co.free') : (SHIP_FEE + " kr");
 
     root.innerHTML = `
       <div class="cart-layout">
         <div class="form-card">
-          <div class="co-h">${t('co.your_details')}</div>
-          <form id="coForm" novalidate>
+          <div class="co-section" style="margin-top:0">
+            <div class="co-h">${t('co.your_details')}</div>
             <div class="form-grid">
               <div class="field"><label>${t('form.name')}</label><input id="coName" type="text" placeholder="${t('form.name_ph')}"></div>
               <div class="field"><label>${t('form.phone')}</label><input id="coPhone" type="tel" placeholder="${t('form.phone_ph')}"></div>
               <div class="field full"><label>${t('form.email')}</label><input id="coEmail" type="email" placeholder="${t('form.email_ph')}"></div>
             </div>
-            <div class="pickup-note">📍 ${t('co.pickup_note')}</div>
-            <div class="co-err" id="coErr"></div>
-          </form>
+          </div>
+
+          <div class="co-section">
+            <div class="co-h">${t('co.method')}</div>
+            <div class="opt-list">
+              <label class="opt sel" data-method="pickup">
+                <input type="radio" name="delivery" value="pickup" checked>
+                <span class="otext"><span class="ot">${t('co.pickup_opt')}</span><span class="od">${t('co.pickup_opt_desc')}</span></span>
+                <span class="oprice">${t('co.free')}</span>
+              </label>
+              <label class="opt" data-method="post">
+                <input type="radio" name="delivery" value="post">
+                <span class="otext"><span class="ot">${t('co.post_opt')}</span><span class="od">${t('co.post_opt_desc')}</span></span>
+                <span class="oprice">${postPrice}</span>
+              </label>
+            </div>
+            <div id="addrBox" hidden>
+              <div class="form-grid">
+                <div class="field full"><label>${t('co.street')}</label><input id="coStreet" type="text"></div>
+                <div class="field"><label>${t('co.postcode')}</label><input id="coZip" type="text"></div>
+                <div class="field"><label>${t('co.city')}</label><input id="coCity" type="text"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="co-section">
+            <div class="co-h">${t('ty.payment')}</div>
+            <div class="opt-list">
+              <label class="opt sel" data-pay="Swish">
+                <input type="radio" name="pay" value="Swish" checked>
+                <span class="otext"><span class="ot">Swish</span><span class="od">${t('co.swish_desc')}</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="co-err" id="coErr"></div>
         </div>
+
         <div class="summary">
           <h3>${t('co.summary')}</h3>
-          <div class="co-items">${rows}</div>
-          <div class="co-line"><span class="n">${t('ty.delivery')}</span><span class="v">${t('ty.pickup')}</span></div>
-          <div class="co-total"><span>${t('ty.total')}</span><span>${fmt(total)} kr</span></div>
-          <div class="co-vat"><span>${t('ty.vat')}</span><span>${fmt(vat)} kr</span></div>
+          <div class="co-items">${itemRows}</div>
+          <div class="co-line"><span class="n">${t('cart.subtotal')}</span><span class="v">${fmt(subtotal)} kr</span></div>
+          <div class="co-line"><span class="n">${t('ty.shipping')}</span><span class="v" id="shipVal"></span></div>
+          <div class="co-total"><span>${t('ty.total')}</span><span id="totalVal"></span></div>
+          <div class="co-vat"><span>${t('ty.vat')}</span><span>${fmt(subtotal * 12 / 112)} kr</span></div>
           <button class="btn btn-primary" id="placeBtn" style="width:100%;margin-top:22px">${t('co.place_order')}</button>
           <div class="fineprint">${t('cart.fineprint')}</div>
         </div>
       </div>`;
+
+    const method = () => document.querySelector('input[name="delivery"]:checked').value;
+    const shipping = () => method() === "post" ? (subtotal >= FREE_OVER ? 0 : SHIP_FEE) : 0;
+    function update(){
+      const ship = shipping();
+      document.getElementById("shipVal").textContent = (method() === "post" && ship > 0) ? (fmt(ship) + " kr") : t('co.free');
+      document.getElementById("totalVal").textContent = fmt(subtotal + ship) + " kr";
+      document.getElementById("addrBox").hidden = method() !== "post";
+      document.querySelectorAll('.opt[data-method]').forEach(o => o.classList.toggle("sel", o.dataset.method === method()));
+    }
+    document.querySelectorAll('input[name="delivery"]').forEach(r => r.onchange = update);
+    update();
 
     document.getElementById("placeBtn").onclick = () => {
       const name = document.getElementById("coName").value.trim();
@@ -114,11 +167,22 @@
       const err = document.getElementById("coErr");
       if (!name || !email || !phone){ err.textContent = t('co.required'); return; }
       if (!emailOk(email)){ err.textContent = t('co.invalid_email'); return; }
-      // save customer + order snapshot (the backend will later email + log this)
+      const m = method();
+      let address = "";
+      if (m === "post"){
+        const street = document.getElementById("coStreet").value.trim();
+        const zip = document.getElementById("coZip").value.trim();
+        const city = document.getElementById("coCity").value.trim();
+        if (!street || !zip || !city){ err.textContent = t('co.address_required'); return; }
+        address = `${street}, ${zip} ${city}`;
+      }
+      const ship = shipping();
       const orderNo = nextOrderNo();
       sessionStorage.setItem("qoods_last_order", JSON.stringify(cart));
-      sessionStorage.setItem("qoods_order_customer", JSON.stringify({ name, email, phone, orderNo }));
-      location.href = "thankyou.html?order=" + orderNo + "&pay=Swish";
+      sessionStorage.setItem("qoods_order_customer", JSON.stringify({ name, email, phone, method: m, address, shipping: ship, orderNo, payment: "Swish" }));
+      let url = "thankyou.html?order=" + orderNo + "&pay=Swish&method=" + m + "&ship=" + ship;
+      if (address) url += "&address=" + encodeURIComponent(address);
+      location.href = url;
     };
   }
 

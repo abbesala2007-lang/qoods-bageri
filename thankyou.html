@@ -105,11 +105,12 @@
       return `<div class="oc-line"><span class="n">${qtyLabel} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
     }).join("");
 
-    const hasShip = ship && !isNaN(ship);
-    const total = subtotal + (hasShip ? ship : 0);
-    const vat = total * 12 / 112; // Swedish food VAT 12% (prices incl. VAT)
-    const deliveryRow = hasShip
-      ? `<div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${fmt(ship)} kr</span></div>`
+    const shipNum = isNaN(ship) ? 0 : ship;
+    const method = q.get("method") || (address ? "post" : "pickup");
+    const total = subtotal + shipNum;
+    const vat = subtotal * 12 / 112; // food VAT 12% on the goods (prices incl. VAT)
+    const deliveryRow = method === "post"
+      ? `<div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${shipNum > 0 ? fmt(shipNum) + ' kr' : t('co.free')}</span></div>`
       : `<div class="oc-line"><span class="n">${t('ty.delivery')}</span><span class="v">${t('ty.pickup')}</span></div>`;
 
     root.innerHTML = `

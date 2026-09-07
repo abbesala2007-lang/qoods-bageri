@@ -53,7 +53,8 @@ const T = {
     "form.phone":"Telefon","form.phone_ph":"07X XXX XX XX",
     "co.title":"Kassa","co.your_details":"Dina uppgifter","co.summary":"Din beställning",
     "co.pickup_note":"Din beställning hämtas i butiken på Östra vägen 2, Åstorp.",
-    "co.place_order":"Slutför beställning","co.required":"Fyll i namn, e-post och telefon.","co.invalid_email":"Kontrollera din e-postadress.","co.back_to_cart":"Tillbaka till kundvagnen","co.empty":"Din kundvagn är tom."
+    "co.place_order":"Slutför beställning","co.required":"Fyll i namn, e-post och telefon.","co.invalid_email":"Kontrollera din e-postadress.","co.back_to_cart":"Tillbaka till kundvagnen","co.empty":"Din kundvagn är tom.",
+    "co.method":"Leveranssätt","co.pickup_opt":"Hämta i butik","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Skicka med post","co.post_opt_desc":"Gratis frakt över 500 kr","co.free":"Gratis","co.street":"Gatuadress","co.postcode":"Postnummer","co.city":"Ort","co.address_required":"Fyll i gatuadress, postnummer och ort.","co.swish_desc":"Betala med Swish"
   },
   en: {
     "nav.menu":"Menu","nav.about":"About","nav.reviews":"Reviews","nav.visit":"Visit","nav.contact":"Contact",
@@ -108,7 +109,8 @@ const T = {
     "form.phone":"Phone","form.phone_ph":"07X XXX XX XX",
     "co.title":"Checkout","co.your_details":"Your details","co.summary":"Your order",
     "co.pickup_note":"Your order is picked up in our store at Östra vägen 2, Åstorp.",
-    "co.place_order":"Place order","co.required":"Please fill in name, email and phone.","co.invalid_email":"Please check your email address.","co.back_to_cart":"Back to cart","co.empty":"Your cart is empty."
+    "co.place_order":"Place order","co.required":"Please fill in name, email and phone.","co.invalid_email":"Please check your email address.","co.back_to_cart":"Back to cart","co.empty":"Your cart is empty.",
+    "co.method":"Delivery method","co.pickup_opt":"Pick up in store","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Delivery by post","co.post_opt_desc":"Free shipping over 500 kr","co.free":"Free","co.street":"Street address","co.postcode":"Postal code","co.city":"City","co.address_required":"Please fill in street, postal code and city.","co.swish_desc":"Pay with Swish"
   },
   ar: {
     "nav.menu":"القائمة","nav.about":"من نحن","nav.reviews":"التقييمات","nav.visit":"زورونا","nav.contact":"تواصل معنا",
@@ -163,7 +165,8 @@ const T = {
     "form.phone":"الهاتف","form.phone_ph":"07X XXX XX XX",
     "co.title":"الدفع","co.your_details":"بياناتك","co.summary":"طلبك",
     "co.pickup_note":"يُستلم طلبك من متجرنا في Östra vägen 2، أوستورب.",
-    "co.place_order":"أكمل الطلب","co.required":"يرجى إدخال الاسم والبريد الإلكتروني والهاتف.","co.invalid_email":"يرجى التحقق من بريدك الإلكتروني.","co.back_to_cart":"العودة إلى السلة","co.empty":"سلتك فارغة."
+    "co.place_order":"أكمل الطلب","co.required":"يرجى إدخال الاسم والبريد الإلكتروني والهاتف.","co.invalid_email":"يرجى التحقق من بريدك الإلكتروني.","co.back_to_cart":"العودة إلى السلة","co.empty":"سلتك فارغة.",
+    "co.method":"طريقة الاستلام","co.pickup_opt":"الاستلام من المتجر","co.pickup_opt_desc":"Östra vägen 2، أوستورب","co.post_opt":"التوصيل بالبريد","co.post_opt_desc":"شحن مجاني فوق 500 كر","co.free":"مجانًا","co.street":"عنوان الشارع","co.postcode":"الرمز البريدي","co.city":"المدينة","co.address_required":"يرجى إدخال الشارع والرمز البريدي والمدينة.","co.swish_desc":"ادفع عبر سويش"
   }
 };
 
