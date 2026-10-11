@@ -110,7 +110,7 @@
 
     const method = q.get("method") || (address ? "post" : "pickup");
     const isPost = method === "post";
-    const vat = subtotal * 12 / 112; // food VAT 12% on the goods (prices incl. VAT)
+    const vat = subtotal * 6 / 106; // VAT 6% on the goods (prices incl. VAT)
     const totalVal = isPost ? `${fmt(subtotal)} kr ${t('co.plus_ship')}` : `${fmt(subtotal)} kr`;
     const deliveryRow = isPost
       ? `<div class="oc-line"><span class="n">${t('ty.shipping')}</span><span class="v">${t('co.ship_tbd')}</span></div>`
