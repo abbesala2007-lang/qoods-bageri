@@ -93,7 +93,7 @@
     if (items.length) sessionStorage.setItem("qoods_last_order", JSON.stringify(items));
 
     const orderNr = q.get("order") || "—";
-    const pay = q.get("pay") || "Swish / Klarna";
+    const pay = t('ty.pay_value');
     const address = q.get("address");
     const ship = q.get("ship") != null ? parseFloat(q.get("ship")) : 0;
 

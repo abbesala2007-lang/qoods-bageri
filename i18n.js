@@ -41,11 +41,11 @@ const T = {
     "pd.total":"Totalt:","pd.add":"Lägg i kundvagn","pd.gocart":"Till kundvagn","pd.added":"Tillagd i kundvagnen ✓",
     "crumb.home":"Hem","crumb.menu":"Meny","unit.kg":"kg",
     "cart.eyebrow":"Kundvagn","cart.title":"Din kundvagn","cart.empty":"Din kundvagn är tom just nu.","cart.browse":"Bläddra i menyn",
-    "cart.summary":"Ordersammanfattning","cart.items":"Varor","cart.subtotal":"Delsumma","cart.total":"Totalt","cart.request":"Betala nu","cart.pay_soon":"Betalning med Swish & Klarna kopplas in inom kort.",
+    "cart.summary":"Ordersammanfattning","cart.items":"Varor","cart.subtotal":"Delsumma","cart.total":"Totalt","cart.request":"Fortsätt till beställning","cart.pay_soon":"Betalning med Swish & Klarna kopplas in inom kort.",
     "cart.fineprint":"Upphämtning i butik · vi bekräftar inom en arbetsdag","cart.remove":"Ta bort",
     "ing.title":"Ingredienser","nutr.title":"Näringsvärde (per 100 g)",
     "nutr.energy":"Energi","nutr.fat":"Fett","nutr.satfat":"varav mättat fett","nutr.carb":"Kolhydrater","nutr.sugar":"varav sockerarter","nutr.fiber":"Fiber","nutr.protein":"Protein","nutr.salt":"Salt",
-    "ty.title":"Tack för din beställning!","ty.sub":"Vi har tagit emot din beställning och förbereder den.",
+    "ty.title":"Tack för din beställning!","ty.sub":"Tack! Vi har tagit emot din beställning och kontaktar dig för att bekräfta och komma överens om betalning.",
     "ty.ordernr":"Ordernummer","ty.payment":"Betalsätt","ty.address":"Leveransadress","ty.pickup":"Upphämtning i butik",
     "ty.items":"Beställda varor","ty.shipping":"Frakt","ty.delivery":"Leverans","ty.total":"Totalt inkl. moms","ty.vat":"varav moms (12 %)",
     "ty.questions":"Har du frågor om din beställning? Svara på ditt bekräftelsemejl eller kontakta oss på info@qoodskakorab.se.",
@@ -53,8 +53,10 @@ const T = {
     "form.phone":"Telefon","form.phone_ph":"07X XXX XX XX",
     "co.title":"Kassa","co.your_details":"Dina uppgifter","co.summary":"Din beställning",
     "co.pickup_note":"Din beställning hämtas i butiken på Östra vägen 2, Åstorp.",
-    "co.place_order":"Slutför beställning","co.required":"Fyll i namn, e-post och telefon.","co.invalid_email":"Kontrollera din e-postadress.","co.back_to_cart":"Tillbaka till kundvagnen","co.empty":"Din kundvagn är tom.",
-    "co.method":"Leveranssätt","co.pickup_opt":"Hämta i butik","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Skicka med post","co.post_opt_desc":"Gratis frakt över 500 kr","co.free":"Gratis","co.street":"Gatuadress","co.postcode":"Postnummer","co.city":"Ort","co.address_required":"Fyll i gatuadress, postnummer och ort.","co.swish_desc":"Betala med Swish"
+    "co.place_order":"Skicka beställning","co.required":"Fyll i namn, e-post och telefon.","co.invalid_email":"Kontrollera din e-postadress.","co.back_to_cart":"Tillbaka till kundvagnen","co.empty":"Din kundvagn är tom.",
+    "co.method":"Leveranssätt","co.pickup_opt":"Hämta i butik","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Skicka med post","co.post_opt_desc":"Gratis frakt över 500 kr","co.free":"Gratis","co.street":"Gatuadress","co.postcode":"Postnummer","co.city":"Ort","co.address_required":"Fyll i gatuadress, postnummer och ort.","co.swish_desc":"Betala med Swish",
+    "co.payment_info":"Ingen betalning online — vi kontaktar dig för att bekräfta beställningen och komma överens om betalning (Swish eller kontant vid upphämtning).","ty.pay_value":"Vid upphämtning eller överenskommelse",
+    "order.title":"Så beställer du","order.sub":"Lägg varorna i kundvagnen och skicka din beställning — eller hör av dig direkt. Vi bekräftar och kommer överens om betalning.","order.call":"Ring oss","order.whatsapp":"WhatsApp","order.msg":"Skicka meddelande"
   },
   en: {
     "nav.menu":"Menu","nav.about":"About","nav.reviews":"Reviews","nav.visit":"Visit","nav.contact":"Contact",
@@ -97,11 +99,11 @@ const T = {
     "pd.total":"Total:","pd.add":"Add to cart","pd.gocart":"Go to cart","pd.added":"Added to your cart ✓",
     "crumb.home":"Home","crumb.menu":"Menu","unit.kg":"kg",
     "cart.eyebrow":"Shopping cart","cart.title":"Your cart","cart.empty":"Your cart is empty for now.","cart.browse":"Browse the menu",
-    "cart.summary":"Order summary","cart.items":"Items","cart.subtotal":"Subtotal","cart.total":"Total","cart.request":"Pay now","cart.pay_soon":"Payment with Swish & Klarna is being set up.",
+    "cart.summary":"Order summary","cart.items":"Items","cart.subtotal":"Subtotal","cart.total":"Total","cart.request":"Continue to order","cart.pay_soon":"Payment with Swish & Klarna is being set up.",
     "cart.fineprint":"Pickup in store · we confirm within one working day","cart.remove":"Remove",
     "ing.title":"Ingredients","nutr.title":"Nutrition (per 100 g)",
     "nutr.energy":"Energy","nutr.fat":"Fat","nutr.satfat":"of which saturates","nutr.carb":"Carbohydrate","nutr.sugar":"of which sugars","nutr.fiber":"Fibre","nutr.protein":"Protein","nutr.salt":"Salt",
-    "ty.title":"Thank you for your order!","ty.sub":"We have received your order and are preparing it.",
+    "ty.title":"Thank you for your order!","ty.sub":"Thank you! We've received your order and will contact you to confirm it and arrange payment.",
     "ty.ordernr":"Order number","ty.payment":"Payment method","ty.address":"Delivery address","ty.pickup":"Store pickup",
     "ty.items":"Ordered items","ty.shipping":"Shipping","ty.delivery":"Delivery","ty.total":"Total incl. VAT","ty.vat":"of which VAT (12%)",
     "ty.questions":"Questions about your order? Reply to your confirmation email or contact us at info@qoodskakorab.se.",
@@ -109,8 +111,10 @@ const T = {
     "form.phone":"Phone","form.phone_ph":"07X XXX XX XX",
     "co.title":"Checkout","co.your_details":"Your details","co.summary":"Your order",
     "co.pickup_note":"Your order is picked up in our store at Östra vägen 2, Åstorp.",
-    "co.place_order":"Place order","co.required":"Please fill in name, email and phone.","co.invalid_email":"Please check your email address.","co.back_to_cart":"Back to cart","co.empty":"Your cart is empty.",
-    "co.method":"Delivery method","co.pickup_opt":"Pick up in store","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Delivery by post","co.post_opt_desc":"Free shipping over 500 kr","co.free":"Free","co.street":"Street address","co.postcode":"Postal code","co.city":"City","co.address_required":"Please fill in street, postal code and city.","co.swish_desc":"Pay with Swish"
+    "co.place_order":"Send order","co.required":"Please fill in name, email and phone.","co.invalid_email":"Please check your email address.","co.back_to_cart":"Back to cart","co.empty":"Your cart is empty.",
+    "co.method":"Delivery method","co.pickup_opt":"Pick up in store","co.pickup_opt_desc":"Östra vägen 2, Åstorp","co.post_opt":"Delivery by post","co.post_opt_desc":"Free shipping over 500 kr","co.free":"Free","co.street":"Street address","co.postcode":"Postal code","co.city":"City","co.address_required":"Please fill in street, postal code and city.","co.swish_desc":"Pay with Swish",
+    "co.payment_info":"No online payment — we'll contact you to confirm your order and arrange payment (Swish or cash on pickup).","ty.pay_value":"On pickup or by agreement",
+    "order.title":"How to order","order.sub":"Add items to your cart and send your order — or reach us directly. We'll confirm and arrange payment.","order.call":"Call us","order.whatsapp":"WhatsApp","order.msg":"Send a message"
   },
   ar: {
     "nav.menu":"القائمة","nav.about":"من نحن","nav.reviews":"التقييمات","nav.visit":"زورونا","nav.contact":"تواصل معنا",
@@ -153,11 +157,11 @@ const T = {
     "pd.total":"الإجمالي:","pd.add":"أضِف إلى السلة","pd.gocart":"إلى السلة","pd.added":"تمت الإضافة إلى سلتك ✓",
     "crumb.home":"الرئيسية","crumb.menu":"القائمة","unit.kg":"كغ",
     "cart.eyebrow":"سلة التسوق","cart.title":"سلتك","cart.empty":"سلتك فارغة حاليًا.","cart.browse":"تصفّح القائمة",
-    "cart.summary":"ملخص الطلب","cart.items":"العناصر","cart.subtotal":"المجموع الفرعي","cart.total":"الإجمالي","cart.request":"ادفع الآن","cart.pay_soon":"يتم حاليًا إعداد الدفع عبر سويش وكلارنا.",
+    "cart.summary":"ملخص الطلب","cart.items":"العناصر","cart.subtotal":"المجموع الفرعي","cart.total":"الإجمالي","cart.request":"متابعة الطلب","cart.pay_soon":"يتم حاليًا إعداد الدفع عبر سويش وكلارنا.",
     "cart.fineprint":"الاستلام من المتجر · نؤكد خلال يوم عمل واحد","cart.remove":"إزالة",
     "ing.title":"المكونات","nutr.title":"القيمة الغذائية (لكل 100 غ)",
     "nutr.energy":"الطاقة","nutr.fat":"الدهون","nutr.satfat":"منها دهون مشبعة","nutr.carb":"الكربوهيدرات","nutr.sugar":"منها سكريات","nutr.fiber":"الألياف","nutr.protein":"البروتين","nutr.salt":"الملح",
-    "ty.title":"شكرًا لطلبك!","ty.sub":"لقد استلمنا طلبك ونقوم بتحضيره.",
+    "ty.title":"شكرًا لطلبك!","ty.sub":"شكرًا! لقد استلمنا طلبك وسنتواصل معك لتأكيده والاتفاق على الدفع.",
     "ty.ordernr":"رقم الطلب","ty.payment":"طريقة الدفع","ty.address":"عنوان التوصيل","ty.pickup":"الاستلام من المتجر",
     "ty.items":"المنتجات المطلوبة","ty.shipping":"الشحن","ty.delivery":"الاستلام","ty.total":"الإجمالي شامل الضريبة","ty.vat":"منها ضريبة القيمة المضافة (12%)",
     "ty.questions":"لديك أسئلة عن طلبك؟ رُدّ على بريد التأكيد أو تواصل معنا على info@qoodskakorab.se.",
@@ -165,8 +169,10 @@ const T = {
     "form.phone":"الهاتف","form.phone_ph":"07X XXX XX XX",
     "co.title":"الدفع","co.your_details":"بياناتك","co.summary":"طلبك",
     "co.pickup_note":"يُستلم طلبك من متجرنا في Östra vägen 2، أوستورب.",
-    "co.place_order":"أكمل الطلب","co.required":"يرجى إدخال الاسم والبريد الإلكتروني والهاتف.","co.invalid_email":"يرجى التحقق من بريدك الإلكتروني.","co.back_to_cart":"العودة إلى السلة","co.empty":"سلتك فارغة.",
-    "co.method":"طريقة الاستلام","co.pickup_opt":"الاستلام من المتجر","co.pickup_opt_desc":"Östra vägen 2، أوستورب","co.post_opt":"التوصيل بالبريد","co.post_opt_desc":"شحن مجاني فوق 500 كر","co.free":"مجانًا","co.street":"عنوان الشارع","co.postcode":"الرمز البريدي","co.city":"المدينة","co.address_required":"يرجى إدخال الشارع والرمز البريدي والمدينة.","co.swish_desc":"ادفع عبر سويش"
+    "co.place_order":"إرسال الطلب","co.required":"يرجى إدخال الاسم والبريد الإلكتروني والهاتف.","co.invalid_email":"يرجى التحقق من بريدك الإلكتروني.","co.back_to_cart":"العودة إلى السلة","co.empty":"سلتك فارغة.",
+    "co.method":"طريقة الاستلام","co.pickup_opt":"الاستلام من المتجر","co.pickup_opt_desc":"Östra vägen 2، أوستورب","co.post_opt":"التوصيل بالبريد","co.post_opt_desc":"شحن مجاني فوق 500 كر","co.free":"مجانًا","co.street":"عنوان الشارع","co.postcode":"الرمز البريدي","co.city":"المدينة","co.address_required":"يرجى إدخال الشارع والرمز البريدي والمدينة.","co.swish_desc":"ادفع عبر سويش",
+    "co.payment_info":"لا يوجد دفع إلكتروني — سنتواصل معك لتأكيد طلبك والاتفاق على الدفع (سويش أو نقدًا عند الاستلام).","ty.pay_value":"عند الاستلام أو بالاتفاق",
+    "order.title":"كيف تطلب","order.sub":"أضف المنتجات إلى السلة وأرسل طلبك — أو تواصل معنا مباشرة. سنؤكد الطلب ونتفق على الدفع.","order.call":"اتصل بنا","order.whatsapp":"واتساب","order.msg":"أرسل رسالة"
   }
 };
 

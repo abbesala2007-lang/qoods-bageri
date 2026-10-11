@@ -305,3 +305,8 @@ html[dir="rtl"] .item-title h4{font-weight:600}
   .cart-item{grid-template-columns:64px 1fr auto;gap:14px;padding:14px}
   .cart-item img{width:64px;height:64px}
 }
+
+/* ---- Order channels (Call / WhatsApp) ---- */
+.order-channels{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:0 auto 28px}
+.order-channels a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:13px 26px;color:var(--ink);font-weight:600;background:var(--card);box-shadow:var(--shadow-sm);transition:.18s ease}
+.order-channels a:hover{border-color:var(--brown);color:var(--brown);transform:translateY(-1px)}
