@@ -39,6 +39,8 @@
   .co-channels{display:flex;gap:12px;flex-wrap:wrap}
   .co-channels a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 18px;color:var(--ink);font-weight:600;background:var(--card);text-decoration:none;transition:.15s}
   .co-channels a:hover{border-color:var(--brown);color:var(--brown)}
+  .co-shipnote{margin-top:14px;padding:12px 15px;background:var(--cream-top);border:1px solid var(--line);border-radius:12px;color:var(--body);font-size:.9rem;line-height:1.6}
+  :root[data-theme="dark"] .co-shipnote{background:rgba(255,255,255,.04)}
 </style>
 </head>
 <body>
@@ -78,7 +80,6 @@
   const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyaX1scCbF4Dig7rfl11uTkEolnfDkJdi3D6M7omLjwk74sqo_WmcFFSt4JvXE0aiMM4g/exec";
   const fmt = n => (Math.round(n * 100) / 100).toLocaleString("sv-SE");
   const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
-  const SHIP_FEE = 49, FREE_OVER = 500;
   function nextOrderNo(){ let n = (parseInt(localStorage.getItem("qoods_order_no") || "1000", 10) || 1000) + 1; localStorage.setItem("qoods_order_no", n); return n; }
 
   function render(){
@@ -96,7 +97,6 @@
       const q = p.type === "kg" ? `${fmt(it.qty)} kg` : `${it.qty} ×`;
       return `<div class="co-line"><span class="n">${q} ${pName(p.id)}</span><span class="v">${fmt(lt)} kr</span></div>`;
     }).join("");
-    const postPrice = subtotal >= FREE_OVER ? t('co.free') : (SHIP_FEE + " kr");
 
     root.innerHTML = `
       <div class="cart-layout">
@@ -121,9 +121,10 @@
               <label class="opt" data-method="post">
                 <input type="radio" name="delivery" value="post">
                 <span class="otext"><span class="ot">${t('co.post_opt')}</span><span class="od">${t('co.post_opt_desc')}</span></span>
-                <span class="oprice">${postPrice}</span>
+                <span class="oprice">${t('co.ship_calc')}</span>
               </label>
             </div>
+            <p class="co-shipnote" id="shipNote" hidden>${t('co.ship_note')}</p>
             <div id="addrBox" hidden>
               <div class="form-grid">
                 <div class="field full"><label>${t('co.street')}</label><input id="coStreet" type="text"></div>
@@ -158,12 +159,12 @@
       </div>`;
 
     const method = () => document.querySelector('input[name="delivery"]:checked').value;
-    const shipping = () => method() === "post" ? (subtotal >= FREE_OVER ? 0 : SHIP_FEE) : 0;
     function update(){
-      const ship = shipping();
-      document.getElementById("shipVal").textContent = (method() === "post" && ship > 0) ? (fmt(ship) + " kr") : t('co.free');
-      document.getElementById("totalVal").textContent = fmt(subtotal + ship) + " kr";
-      document.getElementById("addrBox").hidden = method() !== "post";
+      const isPost = method() === "post";
+      document.getElementById("shipVal").textContent = isPost ? t('co.ship_tbd') : t('co.free');
+      document.getElementById("totalVal").textContent = isPost ? (fmt(subtotal) + " kr " + t('co.plus_ship')) : (fmt(subtotal) + " kr");
+      document.getElementById("addrBox").hidden = !isPost;
+      document.getElementById("shipNote").hidden = !isPost;
       document.querySelectorAll('.opt[data-method]').forEach(o => o.classList.toggle("sel", o.dataset.method === method()));
     }
     document.querySelectorAll('input[name="delivery"]').forEach(r => r.onchange = update);
@@ -185,7 +186,7 @@
         if (!street || !zip || !city){ err.textContent = t('co.address_required'); return; }
         address = `${street}, ${zip} ${city}`;
       }
-      const ship = shipping();
+      const isPost = m === "post";
       const orderNo = nextOrderNo();
 
       // Build a readable order summary and send it to the shop inbox (email only, no payment).
@@ -195,31 +196,35 @@
         const q = p.type === "kg" ? `${fmt(it.qty)} kg` : `${it.qty}×`;
         return `• ${q} ${pName(p.id)} — ${fmt(lt)} kr`;
       }).filter(Boolean).join("\n");
-      const delivery = m === "post" ? `Post${ship > 0 ? " (" + fmt(ship) + " kr)" : " (gratis)"}` : "Upphämtning i butik";
+      const delivery = isPost ? "Post" : "Upphämtning i butik";
+      const shipLine = isPost ? "\nFrakt: beräknas efter adress och storlek — meddela kunden" : "";
+      const totalLine = isPost
+        ? `TOTALT (varor): ${fmt(subtotal)} kr + frakt`
+        : `TOTALT: ${fmt(subtotal)} kr`;
       const message =
 `🛒 NY BESTÄLLNING (via webben) #${orderNo}
 
 ${lines}
 
 Delsumma: ${fmt(subtotal)} kr
-Leverans: ${delivery}${address ? "\nAdress: " + address : ""}
-TOTALT: ${fmt(subtotal + ship)} kr
+Leverans: ${delivery}${address ? "\nAdress: " + address : ""}${shipLine}
+${totalLine}
 
-Betalning: EJ gjord — kontakta kunden för att bekräfta och komma överens om betalning.`;
+Betalning: EJ gjord — kontakta kunden för att bekräfta leverans/frakt och komma överens om betalning.`;
 
       const btn = document.getElementById("placeBtn");
       btn.disabled = true; btn.textContent = t('form.sending');
       err.textContent = "";
 
       sessionStorage.setItem("qoods_last_order", JSON.stringify(cart));
-      sessionStorage.setItem("qoods_order_customer", JSON.stringify({ name, email, phone, method: m, address, shipping: ship, orderNo }));
+      sessionStorage.setItem("qoods_order_customer", JSON.stringify({ name, email, phone, method: m, address, orderNo }));
 
       fetch(ORDER_ENDPOINT, {
         method: "POST", mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({ type: "question", name, email, phone, message })
       }).finally(() => {
-        let url = "thankyou.html?order=" + orderNo + "&method=" + m + "&ship=" + ship;
+        let url = "thankyou.html?order=" + orderNo + "&method=" + m;
         if (address) url += "&address=" + encodeURIComponent(address);
         location.href = url;
       });
